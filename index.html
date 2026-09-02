@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lina Castro Studio — Diseño de marca con dirección estratégica</title>
+<meta name="description" content="Estudio creativo de diseño. Construimos marcas desde la estrategia, la narrativa y el diseño: identidad visual, branding y experiencias UI/UX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fdeee1;
+    --cream-2:#fff6ee;
+    --wine:#6e1e4d;
+    --wine-dark:#571640;
+    --wine-soft:#8a3560;
+    --lilac:#c9aeea;
+    --lilac-soft:#e6d9f6;
+    --lilac-bg:#e7d7f3;
+    --ink:#241a22;
+    --muted:#786c74;
+    --line: rgba(36,26,34,0.1);
+    --white:#ffffff;
+    --radius-lg: 28px;
+    --radius-md: 18px;
+    --radius-sm: 12px;
+    --shadow-soft: 0 20px 45px -25px rgba(110,30,77,0.35);
+    --shadow-card: 0 14px 34px -20px rgba(36,26,34,0.28);
+    --maxw: 1280px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Nunito Sans", sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:"Baloo 2", "Nunito Sans", sans-serif;
+    margin:0;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 48px;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:12.5px;
+    font-weight:800;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--wine);
+    margin-bottom:16px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;
+    height:2px;
+    background:var(--wine);
+    display:inline-block;
+    border-radius:2px;
+  }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:15px 26px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:15px;
+    border:2px solid transparent;
+    white-space:nowrap;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .btn svg{width:16px; height:16px; transition: transform .18s ease;}
+  .btn:hover svg{ transform: translateX(3px); }
+  .btn:active{ transform: scale(0.97); }
+
+  .btn-wine{
+    background:var(--wine);
+    color:#fff;
+    box-shadow:0 12px 24px -12px rgba(110,30,77,0.55);
+  }
+  .btn-wine:hover{ background:var(--wine-dark); box-shadow:0 16px 30px -12px rgba(110,30,77,0.65);}
+
+  .btn-outline{
+    background:transparent;
+    border-color:var(--wine);
+    color:var(--wine);
+  }
+  .btn-outline:hover{ background:var(--wine); color:#fff; }
+
+  .btn-outline-light{
+    background:transparent;
+    border-color:rgba(255,255,255,0.55);
+    color:#fff;
+  }
+  .btn-outline-light:hover{ background:rgba(255,255,255,0.14); border-color:#fff;}
+
+  .btn-white{
+    background:#fff;
+    color:var(--wine);
+  }
+  .btn-white:hover{ background:#fff5fb; transform:translateY(-1px); box-shadow:0 14px 26px -14px rgba(0,0,0,0.35);}
+
+  .btn-lilac{
+    background:var(--lilac-bg);
+    color:var(--wine-dark);
+  }
+  .btn-lilac:hover{ background:var(--lilac); }
+
+  .btn-sm{ padding:11px 20px; font-size:14px; }
+  .btn-block{ width:100%; }
+
+  /* ================= HEADER ================= */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(253,238,225,0.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(110,30,77,0.08);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 48px;
+    max-width:var(--maxw);
+    margin:0 auto;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:"Baloo 2", sans-serif;
+    font-weight:700;
+    font-size:20px;
+  }
+  .brand-mark{
+    width:42px; height:42px;
+    border-radius:50%;
+    background:var(--wine);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:800;
+    flex-shrink:0;
+  }
+  .brand .studio{ color:var(--wine); }
+
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:36px;
+    font-weight:600;
+    font-size:15px;
+    color:#3d2c34;
+  }
+  .nav-links a{ position:relative; padding:4px 0; }
+  .nav-links a::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:-2px;
+    height:2px; background:var(--wine);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform .22s ease;
+  }
+  .nav-links a:hover::after{ transform:scaleX(1); }
+
+  .nav-cta{ display:flex; align-items:center; gap:14px; }
+  .menu-toggle{
+    display:none;
+    width:42px; height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--wine);
+    background:transparent;
+    align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .menu-toggle span, .menu-toggle span::before, .menu-toggle span::after{
+    content:""; display:block; width:18px; height:2px; background:var(--wine); position:relative; transition:.2s;
+  }
+  .menu-toggle span::before{ position:absolute; top:-6px; }
+  .menu-toggle span::after{ position:absolute; top:6px; }
+
+  /* ================= HERO ================= */
+  .hero{
+    padding:76px 0 40px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero-copy p.lede{
+    margin-top:22px;
+    font-size:17.5px;
+    line-height:1.65;
+    color:var(--muted);
+    max-width:520px;
+  }
+  .hero-copy h1{
+    font-size:53px;
+    font-weight:700;
+  }
+  .hero-copy h1 .accent{ color:var(--wine); }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+
+  /* hero visual */
+  .hero-visual{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:520px;
+  }
+  .blob{
+    position:absolute;
+    width:88%;
+    height:92%;
+    right:0;
+    top:2%;
+    background:linear-gradient(155deg, var(--lilac) 0%, #d9c3ef 100%);
+    border-radius: 42% 58% 63% 37% / 47% 40% 60% 53%;
+    animation: blobmove 12s ease-in-out infinite;
+  }
+  @keyframes blobmove{
+    0%,100%{ border-radius: 42% 58% 63% 37% / 47% 40% 60% 53%; }
+    50%{ border-radius: 55% 45% 40% 60% / 55% 60% 40% 45%; }
+  }
+  .flower-frame{
+    position:relative;
+    width:66%;
+    display:block;
+    margin-left:8%;
+    z-index:2;
+    filter: drop-shadow(0 20px 40px rgba(36,26,34,0.18));
+  }
+
+  .badge-pill{
+    position:absolute;
+    top:9%;
+    left:2%;
+    z-index:3;
+    background:#fff;
+    border-radius:999px;
+    padding:11px 22px 11px 11px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    box-shadow:var(--shadow-card);
+    font-weight:700;
+    font-size:14.5px;
+    animation: floaty 5s ease-in-out infinite;
+  }
+  .badge-pill .dot{
+    width:34px; height:34px; border-radius:50%;
+    background:var(--lilac);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--wine-dark);
+    flex-shrink:0;
+  }
+  @keyframes floaty{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-8px); }
+  }
+
+  .rotor{
+    position:absolute;
+    bottom:0%;
+    right:1%;
+    width:170px; height:170px;
+    z-index:4;
+  }
+  .rotor img{ display:block; width:100%; height:100%; }
+
+  /* Stats */
+  .stats-wrap{ margin-top:56px; }
+  .stats{
+    background:linear-gradient(120deg, var(--lilac-bg), var(--lilac-soft));
+    border-radius:26px;
+    padding:34px 60px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    gap:24px;
+    position:relative;
+    box-shadow: 0 24px 44px -30px rgba(110,30,77,0.45);
+  }
+  .stat{ text-align:center; }
+  .stat .num{
+    font-family:"Baloo 2", sans-serif;
+    font-size:36px;
+    font-weight:800;
+    color:var(--wine-dark);
+  }
+  .stat .label{ font-size:15px; color:#5b3f56; margin-top:2px; font-weight:600; }
+  .stat-divider{ width:1px; align-self:stretch; background:rgba(110,30,77,0.18); }
+  .sparkle-chip{
+    position:absolute;
+    left:-26px; top:50%;
+    transform:translateY(-50%);
+    width:60px; height:60px;
+    border-radius:50%;
+    background:var(--cream-2);
+    box-shadow:var(--shadow-card);
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ================= SECTION GENERIC ================= */
+  section{ padding:110px 0; }
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:52px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size:38px;
+    font-weight:700;
+    max-width:640px;
+  }
+  .section-note{
+    max-width:300px;
+    color:var(--muted);
+    font-size:15.5px;
+    line-height:1.6;
+    padding-bottom:6px;
+  }
+
+  /* Portfolio */
+  .portfolio{ background:var(--white); }
+  .grid-portfolio{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:34px 32px;
+  }
+  .p-card{ cursor:pointer; }
+  .p-card .thumb{
+    border-radius:20px;
+    overflow:hidden;
+    aspect-ratio: 4/3;
+    background:#eee;
+    box-shadow: var(--shadow-card);
+  }
+  .p-card .thumb img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .5s cubic-bezier(.2,.7,.3,1);
+  }
+  .p-card:hover .thumb img{ transform:scale(1.08); }
+  .p-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-top:18px;
+  }
+  .p-meta h3{ font-size:19px; font-weight:700; }
+  .p-meta .year{ font-size:13.5px; color:#a99aa2; font-weight:600; }
+  .p-tag{
+    display:block;
+    margin-top:4px;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.07em;
+    text-transform:uppercase;
+    color:var(--wine-soft);
+  }
+  .portfolio-cta{ text-align:center; margin-top:52px; }
+
+  .portfolio-filters{ display:flex; gap:10px; flex-wrap:wrap; margin-top:40px; }
+  .filter-pill{
+    font-family:inherit; font-size:13px; font-weight:700;
+    padding:11px 22px; border-radius:999px; border:1.5px solid var(--line);
+    background:transparent; color:var(--muted); transition:all .18s ease;
+  }
+  .filter-pill:hover{ border-color:var(--wine); color:var(--wine); }
+  .filter-pill.active{ background:var(--wine); border-color:var(--wine); color:#fff; }
+  .grid-portfolio{ margin-top:32px; }
+  .p-card[hidden]{ display:none; }
+
+  /* Case study drawer */
+  .case-overlay{
+    position:fixed; inset:0; z-index:200; background:rgba(36,26,34,.55);
+    backdrop-filter:blur(6px); display:flex; justify-content:flex-end;
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility 0s linear .3s;
+  }
+  .case-overlay.open{ opacity:1; visibility:visible; transition:opacity .3s ease; }
+  .case-panel{
+    width:min(560px,94vw); height:100%; overflow-y:auto; background:var(--cream-2);
+    box-shadow:-24px 0 60px rgba(36,26,34,.3);
+    transform:translateX(28px); opacity:0; transition:transform .35s ease, opacity .35s ease;
+  }
+  .case-overlay.open .case-panel{ transform:translateX(0); opacity:1; }
+  .case-photo{ aspect-ratio:16/10; background:#eee; }
+  .case-photo img{ width:100%; height:100%; object-fit:cover; }
+  .case-body{ padding:28px 40px 56px; position:relative; }
+  .case-close{
+    font-family:inherit; background:#fff; border:none; cursor:pointer;
+    font-size:12.5px; font-weight:700; color:var(--wine);
+    padding:10px 18px; border-radius:999px; box-shadow:var(--shadow-card);
+    margin-top:-22px;
+  }
+  .case-head{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; margin-top:26px; }
+  .case-head h3{ font-size:27px; }
+  .case-head .year{ font-size:13px; font-weight:600; color:#a99aa2; }
+  .case-body .p-tag{ display:block; margin-top:8px; }
+  .case-brief{ margin-top:20px; font-size:15px; line-height:1.75; color:var(--muted); }
+  .case-palette{ display:flex; gap:9px; margin-top:26px; }
+  .case-palette span{ flex:1; height:44px; border-radius:12px; }
+  .case-label{ font-size:10.5px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:#a99aa2; margin:32px 0 14px; }
+  .case-deliverables{ display:flex; flex-direction:column; gap:11px; }
+  .case-deliverables li{ display:flex; gap:11px; font-size:14px; color:var(--ink); }
+  .case-deliverables li::before{ content:"\2713"; color:var(--wine); font-weight:700; }
+  .case-cta{ display:flex; justify-content:center; margin-top:32px; width:100%; }
+  body.case-open{ overflow:hidden; }
+  .filter-pill:focus-visible, .case-close:focus-visible, .p-card:focus-visible{
+    outline:2px solid var(--wine); outline-offset:3px;
+  }
+
+  /* Pricing */
+  .pricing{ position:relative; }
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+    align-items:stretch;
+  }
+  .price-card{
+    background:#fff;
+    border-radius:26px;
+    padding:38px 34px 34px;
+    box-shadow:var(--shadow-card);
+    display:flex;
+    flex-direction:column;
+  }
+  .price-card.featured{
+    background:linear-gradient(165deg, var(--wine) 0%, #4d1236 100%);
+    color:#fff;
+    transform:translateY(-14px);
+    box-shadow:0 30px 60px -25px rgba(110,30,77,0.6);
+    position:relative;
+  }
+  .featured-tag{
+    position:absolute;
+    top:-16px; left:50%; transform:translateX(-50%);
+    background:var(--lilac);
+    color:var(--wine-dark);
+    font-size:11.5px;
+    font-weight:800;
+    letter-spacing:0.08em;
+    padding:8px 18px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .price-icon{
+    width:46px; height:46px;
+    border-radius:14px;
+    background:var(--lilac-bg);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:22px;
+    color:var(--wine);
+  }
+  .featured .price-icon{ background:rgba(255,255,255,0.14); color:#fff; }
+  .price-card h3{ font-size:23px; font-weight:700; margin-bottom:14px; }
+  .price-card .desc{
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--muted);
+    margin-bottom:22px;
+  }
+  .featured .desc{ color:rgba(255,255,255,0.82); }
+  .price-list{ margin-bottom:28px; flex-grow:1; }
+  .price-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14.5px;
+    font-weight:700;
+    padding:8px 0;
+  }
+  .price-list li svg{ flex-shrink:0; margin-top:2px; color:var(--wine); }
+  .featured .price-list li svg{ color:var(--lilac); }
+  .price-card .btn{ margin-top:auto; }
+
+  /* UI/UX banner */
+  .uiux-band{
+    background:linear-gradient(115deg, var(--lilac) 0%, #b79ce0 100%);
+    padding:52px 0;
+  }
+  .uiux-inner{
+    display:flex;
+    align-items:center;
+    gap:34px;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .uiux-left{ display:flex; align-items:center; gap:26px; }
+  .uiux-icon{
+    width:66px; height:66px;
+    border-radius:20px;
+    background:var(--wine);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .uiux-left h3{ font-size:24px; font-weight:700; max-width:560px; }
+  .uiux-left p{ margin-top:8px; color:#3d2140; font-size:15px; max-width:480px; line-height:1.55; }
+
+  /* Testimonial */
+  .testimonial{ text-align:center; }
+  .testimonial-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--lilac-bg);
+    color:var(--wine-dark);
+    padding:11px 22px;
+    border-radius:999px;
+    font-weight:800;
+    font-size:14px;
+    margin-bottom:22px;
+  }
+  .quote-mark{
+    font-family:"Baloo 2", sans-serif;
+    font-size:64px;
+    color:var(--lilac);
+    line-height:1;
+    margin-bottom:10px;
+    font-weight:800;
+    transform:skewX(-8deg);
+  }
+  .testi-card{
+    max-width:820px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:32px 32px 60px 60px;
+    box-shadow:var(--shadow-card);
+    padding:44px 56px 40px;
+    text-align:left;
+  }
+  .stars{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .stars .stargroup{ display:flex; gap:3px; color:#f5a623; }
+  .stars .when{ color:#a99aa2; font-size:14px; }
+  .testi-card p.body{
+    font-size:19px;
+    line-height:1.6;
+    color:#3d2c34;
+    margin-bottom:28px;
+  }
+  .testi-person{ display:flex; align-items:center; gap:14px; }
+  .testi-avatar{
+    width:50px; height:50px;
+    border-radius:50%;
+    background:var(--lilac-bg);
+    color:var(--wine-dark);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800;
+    font-size:15px;
+    flex-shrink:0;
+  }
+  .testi-person .name{ font-weight:800; font-size:15.5px; }
+  .testi-person .role{ font-size:13.5px; color:var(--muted); margin-top:1px; }
+
+  /* Footer CTA + footer */
+  .footer-cta{
+    background:var(--wine);
+    color:#fff;
+    padding:76px 0 0;
+    border-radius: 48px 48px 0 0;
+  }
+  .cta-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+    flex-wrap:wrap;
+    padding-bottom:56px;
+  }
+  .cta-row h2{
+    color:#fff;
+    font-size:38px;
+    font-weight:700;
+    max-width:600px;
+  }
+  .footer-divider{ height:1px; background:rgba(255,255,255,0.16); }
+  .footer-grid{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap:40px;
+    padding:52px 0 40px;
+  }
+  .footer-grid h4{
+    color:#fff;
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .footer-grid p.desc{
+    color:rgba(255,255,255,0.72);
+    font-size:14.5px;
+    line-height:1.6;
+    max-width:280px;
+    margin-bottom:22px;
+  }
+  .social-row{ display:flex; gap:12px; }
+  .social-row a{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .social-row a:hover{ background:#fff; color:var(--wine); transform:translateY(-2px); }
+  .footer-col-label{
+    text-transform:uppercase;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.1em;
+    color:rgba(255,255,255,0.55);
+    margin-bottom:16px;
+  }
+  .footer-links li{ margin-bottom:12px; }
+  .footer-links a{ color:rgba(255,255,255,0.88); font-size:15px; font-weight:600; }
+  .footer-links a:hover{ color:var(--lilac); }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:26px 0;
+    border-top:1px solid rgba(255,255,255,0.12);
+    font-size:13.5px;
+    color:rgba(255,255,255,0.55);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* Reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .blob, .badge-pill{ animation:none !important; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .case-panel, .case-overlay{ transition:none; }
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 1080px){
+    .wrap{ padding:0 32px; }
+    .nav{ padding:16px 32px; }
+    .hero-copy h1{ font-size:44px; }
+    .hero-grid{ gap:36px; }
+    .footer-grid{ grid-template-columns:1fr 1fr; }
+    .footer-grid > div:first-child{ grid-column:1/-1; }
+  }
+
+  @media (max-width: 900px){
+    .nav-links{ display:none; }
+    .menu-toggle{ display:flex; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-visual{ order:-1; min-height:420px; margin-bottom:10px; }
+    .hero-copy h1{ font-size:38px; }
+    .stats{ flex-wrap:wrap; padding:30px; gap:20px 10px;}
+    .stat{ width:40%; }
+    .stat-divider{ display:none; }
+    .section-head h2{ font-size:30px; }
+    .grid-portfolio{ grid-template-columns:1fr 1fr; }
+    .pricing-grid{ grid-template-columns:1fr; }
+    .price-card.featured{ transform:none; order:-1; }
+    .uiux-inner{ flex-direction:column; align-items:flex-start; }
+    .testi-card{ padding:34px 26px; }
+    .cta-row{ flex-direction:column; align-items:flex-start; }
+    .cta-row h2{ font-size:30px; }
+    .footer-grid{ grid-template-columns:1fr; }
+  }
+
+  @media (max-width: 560px){
+    .wrap{ padding:0 20px; }
+    .nav{ padding:14px 20px; }
+    .brand span.name{ display:none; }
+    .hero{ padding:36px 0 20px; }
+    .hero-copy h1{ font-size:32px; }
+    .hero-actions{ flex-direction:column; align-items:stretch; }
+    .hero-actions .btn{ width:100%; }
+    .grid-portfolio{ grid-template-columns:1fr; }
+    .case-body{ padding:24px 24px 44px; }
+    section{ padding:70px 0; }
+    .rotor{ width:130px; height:130px; }
+    .badge-pill{ font-size:12.5px; padding:9px 16px 9px 9px; }
+    .badge-pill .dot{ width:28px; height:28px; }
+  }
+
+  /* Mobile nav panel */
+  .mobile-nav{
+    display:none;
+    position:fixed; inset:0;
+    background:var(--cream);
+    z-index:200;
+    padding:24px 24px;
+    flex-direction:column;
+  }
+  .mobile-nav.open{ display:flex; }
+  .mobile-nav-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:40px; gap:16px; }
+  .mobile-nav-top .brand{ font-size:17px; flex-shrink:1; min-width:0; }
+  .mobile-nav-top .brand-mark{ width:34px; height:34px; font-size:12px; }
+  .mobile-nav-top .menu-toggle{ flex-shrink:0; }
+  .mobile-nav a{
+    font-family:"Baloo 2", sans-serif;
+    font-size:28px;
+    font-weight:600;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-nav .btn{ margin-top:30px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <span class="brand-mark">LC</span>
+      <span class="name">Lina Castro <span class="studio">Studio</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#portafolio">Portafolio</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#uiux">Diseño UI/UX</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <div class="nav-cta">
+      <a href="https://wa.me/573226074509" target="_blank" rel="noopener" class="btn btn-wine btn-sm">
+        Hablemos
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-top">
+    <a href="#top" class="brand"><span class="brand-mark">LC</span> Lina Castro <span class="studio">Studio</span></a>
+    <button class="menu-toggle" id="menuClose" aria-label="Cerrar menú" style="transform:rotate(45deg)"><span></span></button>
+  </div>
+  <a href="#portafolio">Portafolio</a>
+  <a href="#paquetes">Paquetes</a>
+  <a href="#uiux">Diseño UI/UX</a>
+  <a href="#proceso">Proceso</a>
+  <a href="#contacto">Contacto</a>
+  <a href="https://wa.me/573226074509" target="_blank" rel="noopener" class="btn btn-wine">Hablemos</a>
+</div>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" style="padding-top:64px;">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Estudio creativo de diseño</span>
+          <h1>Diseño de marca con <span class="accent">dirección</span> estratégica</h1>
+          <p class="lede">Construimos marcas desde la estrategia, la narrativa y el diseño. Desarrollamos identidad visual, branding y experiencias UI/UX para crear sistemas de marca claros, distintivos y consistentes, diseñados para crecer con propósito y mantener relevancia en cualquier contexto.</p>
+          <div class="hero-actions">
+            <a href="#paquetes" class="btn btn-wine">
+              Conoce los paquetes de branding
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#uiux" class="btn btn-outline">Diseño UI/UX</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="blob"></div>
+          <img class="flower-frame" src="assets/images/Imagenes landing-08.png" alt="Lina Castro, fundadora de Lina Castro Studio">
+
+          <div class="badge-pill">
+            <span class="dot"><img src="assets/images/Imagenes landing-09.png" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></span>
+            Identidad completa
+          </div>
+
+          <div class="rotor" aria-hidden="true">
+            <img src="assets/images/Imagenes landing-07.png" alt="" width="170" height="170">
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-wrap reveal">
+        <div class="stats">
+          <div class="sparkle-chip">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#6e1e4d"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z"/></svg>
+          </div>
+          <div class="stat"><div class="num">+35</div><div class="label">Marcas creadas</div></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><div class="num">+6 años</div><div class="label">De experiencia</div></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><div class="num">5.0/5</div><div class="label">Satisfacción</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PORTFOLIO ================= -->
+  <section class="portfolio" id="portafolio">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Portafolio</span>
+          <h2>Una selección de marcas que hemos construido de cero</h2>
+        </div>
+      </div>
+
+      <div class="portfolio-filters reveal">
+        <button class="filter-pill active" data-filter="Todos">Todos</button>
+        <button class="filter-pill" data-filter="Branding">Branding</button>
+        <button class="filter-pill" data-filter="Packaging">Packaging</button>
+        <button class="filter-pill" data-filter="UI/UX">UI/UX</button>
+      </div>
+
+      <div class="grid-portfolio" id="portfolioGrid">
+        <div class="p-card reveal" data-index="0" data-cats="Branding,Packaging" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="thumb"><img src="assets/images/imagenes landing-01.png" alt="Empaque de la marca Croomie" loading="lazy"></div>
+          <div class="p-meta"><h3>Croomie</h3><span class="year">2025</span></div>
+          <span class="p-tag">Branding + Packaging</span>
+        </div>
+        <div class="p-card reveal" data-index="1" data-cats="Branding" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="thumb"><img src="assets/images/imagenes landing-02.png" alt="Señalética de Trivium Barber Club" loading="lazy"></div>
+          <div class="p-meta"><h3>Trivium Barber Club</h3><span class="year">2024</span></div>
+          <span class="p-tag">Identidad de marca</span>
+        </div>
+        <div class="p-card reveal" data-index="2" data-cats="Branding" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="thumb"><img src="assets/images/imagenes landing-03.png" alt="Papelería de Twins Beauty Salon & Barber" loading="lazy"></div>
+          <div class="p-meta"><h3>Twins Beauty Salon &amp; Barber</h3><span class="year">2024</span></div>
+          <span class="p-tag">Identidad de marca</span>
+        </div>
+        <div class="p-card reveal" data-index="3" data-cats="Branding" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="thumb"><img src="assets/images/imagenes landing-04.png" alt="Fachada de la tienda Gustossia" loading="lazy"></div>
+          <div class="p-meta"><h3>Gustossia</h3><span class="year">2023</span></div>
+          <span class="p-tag">Identidad de marca</span>
+        </div>
+        <div class="p-card reveal" data-index="4" data-cats="Branding,UI/UX" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="thumb"><img src="assets/images/imagenes landing-05.png" alt="Bolsa de tela de Velmora Beauty" loading="lazy"></div>
+          <div class="p-meta"><h3>Velmora Beauty</h3><span class="year">2023</span></div>
+          <span class="p-tag">Identidad de marca + UI/UX</span>
+        </div>
+        <div class="p-card reveal" data-index="5" data-cats="Branding" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="thumb"><img src="assets/images/imagenes landing-06.png" alt="Mockup del sitio web de Saga" loading="lazy"></div>
+          <div class="p-meta"><h3>Saga</h3><span class="year">2022</span></div>
+          <span class="p-tag">Identidad de marca</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="case-overlay" id="caseOverlay">
+    <div class="case-panel" id="casePanel" role="dialog" aria-modal="true" aria-labelledby="caseName">
+      <div class="case-photo"><img id="caseImg" src="" alt=""></div>
+      <div class="case-body">
+        <button class="case-close" id="caseClose" type="button">&#8592; Cerrar caso</button>
+        <div class="case-head">
+          <h3 id="caseName"></h3>
+          <span class="year" id="caseYear"></span>
+        </div>
+        <span class="p-tag" id="caseTag"></span>
+        <p class="case-brief" id="caseBrief"></p>
+        <div class="case-palette" id="casePalette"></div>
+        <div class="case-label">Entregables</div>
+        <ul class="case-deliverables" id="caseDeliverables"></ul>
+        <a href="#contacto" class="btn btn-wine case-cta" id="caseCta">Quiero algo así para mi marca</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PRICING ================= -->
+  <section class="pricing" id="paquetes">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Paquetes de branding</span>
+          <h2>Elige el nivel de identidad que tu marca necesita hoy</h2>
+        </div>
+        <p class="section-note">Todos los paquetes incluyen sesión de descubrimiento y dos rondas de revisión.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card reveal">
+          <div class="price-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z"/></svg>
+          </div>
+          <h3>Esencial</h3>
+          <p class="desc">Ideal para marcas nuevas que necesitan una base visual sólida y coherente.</p>
+          <ul class="price-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Logotipo + variantes</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Paleta de color</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Tipografía de marca</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Mini guía de uso</li>
+          </ul>
+          <a href="#contacto" class="btn btn-outline btn-block">Ver detalles</a>
+        </div>
+
+        <div class="price-card featured reveal">
+          <span class="featured-tag">Más elegido</span>
+          <div class="price-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z"/></svg>
+          </div>
+          <h3>Identidad Completa</h3>
+          <p class="desc">El sistema de marca completo, listo para verse consistente en todos lados.</p>
+          <ul class="price-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Todo lo de Esencial</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Papelería y aplicaciones</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Iconografía personalizada</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Manual de marca completo</li>
+          </ul>
+          <a href="#contacto" class="btn btn-white btn-block">Ver detalles</a>
+        </div>
+
+        <div class="price-card reveal">
+          <div class="price-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z"/></svg>
+          </div>
+          <h3>Marca 360</h3>
+          <p class="desc">Estrategia + identidad + presencia digital, para lanzar o relanzar sin cabos sueltos.</p>
+          <ul class="price-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Todo lo de Identidad Completa</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Estrategia de marca</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Plantillas para redes</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Landing page de lanzamiento</li>
+          </ul>
+          <a href="#contacto" class="btn btn-outline btn-block">Ver detalles</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= UI/UX BAND ================= -->
+  <section class="uiux-band reveal" id="uiux" style="padding:52px 0;">
+    <div class="wrap">
+      <div class="uiux-inner">
+        <div class="uiux-left">
+          <div class="uiux-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div>
+            <h3>¿Tu marca ya tiene identidad y ahora necesita un sitio o producto digital?</h3>
+            <p>También diseñamos experiencias UI/UX que se sienten una extensión natural de tu marca, no un proyecto aparte.</p>
+          </div>
+        </div>
+        <a href="#contacto" class="btn btn-wine">
+          Diseño UI/UX
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIAL ================= -->
+  <section class="testimonial" id="proceso">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="testimonial-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z"/></svg>
+          Historias de marca
+        </span>
+      </div>
+      <div class="quote-mark reveal">&ldquo;</div>
+      <div class="testi-card reveal">
+        <div class="stars">
+          <span class="stargroup">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9-6.2-3.3-6.2 3.3 1.2-6.9-5-4.9 6.9-1z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9-6.2-3.3-6.2 3.3 1.2-6.9-5-4.9 6.9-1z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9-6.2-3.3-6.2 3.3 1.2-6.9-5-4.9 6.9-1z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9-6.2-3.3-6.2 3.3 1.2-6.9-5-4.9 6.9-1z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9-6.2-3.3-6.2 3.3 1.2-6.9-5-4.9 6.9-1z"/></svg>
+          </span>
+          <span class="when">Hace 45 semanas</span>
+        </div>
+        <p class="body">Lina se esforzó demasiado en diseñarnos el logo de nuestra empresa. Ya habíamos intentado el proceso con otros diseñadores, pero ninguno metió su corazón al proyecto como lo hizo Lina. 100% recomendado.</p>
+        <div class="testi-person">
+          <div class="testi-avatar">PS</div>
+          <div>
+            <div class="name">Pablo Solórzano.</div>
+            <div class="role">Director, Oak &amp; Ash — Miami, Estados Unidos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER CTA + FOOTER ================= -->
+  <footer class="footer-cta" id="contacto">
+    <div class="wrap">
+      <div class="cta-row reveal">
+        <h2>¿Lista para darle a tu marca la identidad que se merece?</h2>
+        <a href="#" class="btn btn-white">
+          Agenda una consultoría
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="footer-divider"></div>
+
+      <div class="footer-grid">
+        <div>
+          <h4>Lina Castro Studio</h4>
+          <p class="desc">Estudio de diseño de marca dedicado a crear identidades cálidas, claras y memorables.</p>
+          <div class="social-row">
+            <a href="https://www.instagram.com/linacastro.st/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.6h2.6l.4-3h-3V8.4c0-.9.3-1.5 1.6-1.5h1.6V4.2C16.4 4.1 15.4 4 14.3 4c-2.5 0-4.3 1.5-4.3 4.3v2.1H7.4v3H10V21z"/></svg></a>
+            <a href="https://wa.me/573226074509" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="17" height="17" viewBox="0 0 16 16" fill="currentColor"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.336-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-label">Navegación</div>
+          <ul class="footer-links">
+            <li><a href="#portafolio">Portafolio</a></li>
+            <li><a href="#paquetes">Paquetes de branding</a></li>
+            <li><a href="#uiux">Diseño UI/UX</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-label">Contacto</div>
+          <ul class="footer-links">
+            <li><a href="mailto:hola@linacastrostudio.com">hola@linacastrostudio.com</a></li>
+            <li><a href="https://www.instagram.com/linacastro.st/" target="_blank" rel="noopener">@linacastro.st</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Lina Castro Studio. Todos los derechos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // Mobile nav
+  const menuToggle = document.getElementById('menuToggle');
+  const menuClose = document.getElementById('menuClose');
+  const mobileNav = document.getElementById('mobileNav');
+  menuToggle.addEventListener('click', () => mobileNav.classList.add('open'));
+  menuClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.14 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Portfolio: filters + case study drawer
+  const PROJECTS = [{"name": "Croomie", "year": "2025", "tag": "Branding + Packaging", "cats": ["Branding", "Packaging"], "brief": "Identidad de marca extendida al empaque: el mismo lenguaje visual resuelto en etiquetas, cajas y aplicaciones físicas, listo para producción.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico", "Aplicación en empaque"], "palette": ["#a0aacb", "#26211e", "#010000", "#7b7a82"]}, {"name": "Trivium Barber Club", "year": "2024", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#0f6158", "#4f3f36", "#8a817d", "#fbfcfb"]}, {"name": "Twins Beauty Salon &amp; Barber", "year": "2024", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#ac866e", "#fcecdf", "#cab8a6", "#7a5939"]}, {"name": "Gustossia", "year": "2023", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#71684c", "#bba68d", "#0d0b04", "#433b2e"]}, {"name": "Velmora Beauty", "year": "2023", "tag": "Identidad de marca + UI/UX", "cats": ["Branding", "UI/UX"], "brief": "La identidad de marca traducida a una experiencia digital coherente, donde cada pantalla se siente una extensión natural del sistema visual.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico", "Diseño de interfaz UI/UX"], "palette": ["#5c272c", "#e9c4cd", "#1d100e", "#a96569"]}, {"name": "Saga", "year": "2022", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#d16c55", "#c9beb0", "#77463a", "#f8f6f6"]}];
+  const grid = document.getElementById('portfolioGrid');
+  const cards = Array.from(grid.querySelectorAll('.p-card'));
+  const filterPills = document.querySelectorAll('.filter-pill');
+
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const f = pill.dataset.filter;
+      cards.forEach(card => {
+        const cats = card.dataset.cats.split(',');
+        card.hidden = !(f === 'Todos' || cats.includes(f));
+      });
+    });
+  });
+
+  const overlay = document.getElementById('caseOverlay');
+  const caseImg = document.getElementById('caseImg');
+  const caseName = document.getElementById('caseName');
+  const caseYear = document.getElementById('caseYear');
+  const caseTag = document.getElementById('caseTag');
+  const caseBrief = document.getElementById('caseBrief');
+  const casePalette = document.getElementById('casePalette');
+  const caseDeliverables = document.getElementById('caseDeliverables');
+  const caseClose = document.getElementById('caseClose');
+
+  function openCase(card) {
+    const i = Number(card.dataset.index);
+    const p = PROJECTS[i];
+    const img = card.querySelector('img');
+    caseImg.src = img.src;
+    caseImg.alt = img.alt;
+    caseName.textContent = p.name;
+    caseYear.textContent = p.year;
+    caseTag.textContent = p.tag;
+    caseBrief.textContent = p.brief;
+    casePalette.innerHTML = p.palette.map(c => `<span style="background:${c}"></span>`).join('');
+    caseDeliverables.innerHTML = p.deliverables.map(d => `<li>${d}</li>`).join('');
+    overlay.classList.add('open');
+    document.body.classList.add('case-open');
+  }
+
+  function closeCase() {
+    overlay.classList.remove('open');
+    document.body.classList.remove('case-open');
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => openCase(card));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCase(card); }
+    });
+  });
+  caseClose.addEventListener('click', closeCase);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeCase(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCase(); });
+</script>
+
+</body>
+</html>
