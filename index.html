@@ -100,7 +100,7 @@
     align-items:center;
     gap:10px;
     font-size:12.5px;
-    font-weight:800;
+    font-weight:500;
     letter-spacing:0.14em;
     text-transform:uppercase;
     color:var(--wine);
@@ -253,7 +253,7 @@
   }
   .hero-copy p.lede{
     margin-top:22px;
-    font-size:17.5px;
+    font-size:19px;
     line-height:1.65;
     color:var(--muted);
     max-width:520px;
@@ -443,23 +443,48 @@
   .filter-pill.active{ background:var(--wine); border-color:var(--wine); color:#fff; }
   .grid-portfolio{ margin-top:32px; }
   .p-card[hidden]{ display:none; }
+  .portfolio-more{ display:flex; justify-content:center; margin-top:48px; }
 
   /* Case study drawer */
   .case-overlay{
     position:fixed; inset:0; z-index:200; background:rgba(36,26,34,.55);
-    backdrop-filter:blur(6px); display:flex; justify-content:flex-end;
+    backdrop-filter:blur(6px); display:flex; justify-content:center; align-items:center; padding:28px;
     opacity:0; visibility:hidden; transition:opacity .3s ease, visibility 0s linear .3s;
   }
   .case-overlay.open{ opacity:1; visibility:visible; transition:opacity .3s ease; }
   .case-panel{
-    width:min(560px,94vw); height:100%; overflow-y:auto; background:var(--cream-2);
-    box-shadow:-24px 0 60px rgba(36,26,34,.3);
-    transform:translateX(28px); opacity:0; transition:transform .35s ease, opacity .35s ease;
+    width:min(1180px,96vw); max-height:92vh; overflow-y:auto; overflow-x:hidden;
+    background:var(--cream-2); border-radius:22px;
+    box-shadow:0 40px 90px rgba(36,26,34,.4);
+    transform:scale(.96); opacity:0; transition:transform .35s ease, opacity .35s ease;
   }
-  .case-overlay.open .case-panel{ transform:translateX(0); opacity:1; }
-  .case-photo{ aspect-ratio:16/10; background:#eee; }
-  .case-photo img{ width:100%; height:100%; object-fit:cover; }
-  .case-body{ padding:28px 40px 56px; position:relative; }
+  .case-overlay.open .case-panel{ transform:scale(1); opacity:1; }
+  .case-slider{ position:relative; background:#eee; }
+  .case-slider-track{
+    display:flex; gap:4px; height:min(56vh,460px); overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+  }
+  .case-slide{ position:relative; flex:0 0 auto; height:100%; scroll-snap-align:start; }
+  .case-slide img{ height:100%; width:auto; max-width:none; object-fit:cover; display:block; }
+  .case-slider-track.single-slide .case-slide{ flex:0 0 100%; }
+  .case-slider-track.single-slide .case-slide img{ width:100%; }
+  .case-slide-caption{
+    position:absolute; left:0; right:0; bottom:0; padding:14px 18px 12px;
+    font-size:12.5px; line-height:1.4; color:#fff; white-space:nowrap;
+    background:linear-gradient(to top, rgba(20,12,17,.72), rgba(20,12,17,0));
+  }
+  .case-slider-nav{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:2;
+    width:40px; height:40px; border-radius:999px; border:none; cursor:pointer;
+    background:rgba(255,255,255,.9); color:var(--wine); font-size:19px; line-height:1;
+    display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-card);
+    transition:background .18s ease, transform .18s ease;
+  }
+  .case-slider-nav:hover{ background:#fff; transform:translateY(-50%) scale(1.06); }
+  .case-slider-nav.prev{ left:16px; }
+  .case-slider-nav.next{ right:16px; }
+  .case-slider-nav[hidden]{ display:none; }
+  .case-body{ padding:28px 40px 56px; position:relative; max-width:640px; margin:0 auto; }
   .case-close{
     font-family:inherit; background:#fff; border:none; cursor:pointer;
     font-size:12.5px; font-weight:700; color:var(--wine);
@@ -787,15 +812,16 @@
       <span class="name">Lina Castro <span class="studio">Studio</span></span>
     </a>
     <div class="nav-links">
-      <a href="#portafolio">Portafolio</a>
       <a href="#paquetes">Paquetes</a>
+      <a href="#portafolio">Proyectos</a>
+      <a href="#comercio">Comercio</a>
       <a href="#uiux">Diseño UI/UX</a>
       <a href="#proceso">Proceso</a>
       <a href="#contacto">Contacto</a>
     </div>
     <div class="nav-cta">
       <a href="https://wa.me/573226074509" target="_blank" rel="noopener" class="btn btn-wine btn-sm">
-        Hablemos
+        Contáctame
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><span></span></button>
@@ -808,12 +834,13 @@
     <a href="#top" class="brand"><span class="brand-mark">LC</span> Lina Castro <span class="studio">Studio</span></a>
     <button class="menu-toggle" id="menuClose" aria-label="Cerrar menú" style="transform:rotate(45deg)"><span></span></button>
   </div>
-  <a href="#portafolio">Portafolio</a>
   <a href="#paquetes">Paquetes</a>
+  <a href="#portafolio">Proyectos</a>
+  <a href="#comercio">Comercio</a>
   <a href="#uiux">Diseño UI/UX</a>
   <a href="#proceso">Proceso</a>
   <a href="#contacto">Contacto</a>
-  <a href="https://wa.me/573226074509" target="_blank" rel="noopener" class="btn btn-wine">Hablemos</a>
+  <a href="https://wa.me/573226074509" target="_blank" rel="noopener" class="btn btn-wine">Contáctame</a>
 </div>
 
 <main id="top">
@@ -825,7 +852,7 @@
         <div class="hero-copy">
           <span class="eyebrow">Estudio creativo de diseño</span>
           <h1>Diseño de marca con <span class="accent">dirección</span> estratégica</h1>
-          <p class="lede">Construimos marcas desde la estrategia, la narrativa y el diseño. Desarrollamos identidad visual, branding y experiencias UI/UX para crear sistemas de marca claros, distintivos y consistentes, diseñados para crecer con propósito y mantener relevancia en cualquier contexto.</p>
+          <p class="lede">Diseñamos identidad de marca con estrategia y narrativa. Creamos branding, identidad visual y experiencias UI/UX en sistemas de marca claros y consistentes, listos para crecer con propósito.</p>
           <div class="hero-actions">
             <a href="#paquetes" class="btn btn-wine">
               Conoce los paquetes de branding
@@ -870,8 +897,8 @@
     <div class="wrap">
       <div class="section-head reveal">
         <div>
-          <span class="eyebrow">Portafolio</span>
-          <h2>Una selección de marcas que hemos construido de cero</h2>
+          <span class="eyebrow">Proyectos</span>
+          <h2>Portafolio de branding e identidad de marca</h2>
         </div>
       </div>
 
@@ -914,12 +941,20 @@
           <span class="p-tag">Identidad de marca</span>
         </div>
       </div>
+
+      <div class="portfolio-more reveal">
+        <button type="button" class="btn btn-outline" id="verPortafolioCompleto">Ver portafolio completo</button>
+      </div>
     </div>
   </section>
 
   <div class="case-overlay" id="caseOverlay">
     <div class="case-panel" id="casePanel" role="dialog" aria-modal="true" aria-labelledby="caseName">
-      <div class="case-photo"><img id="caseImg" src="" alt=""></div>
+      <div class="case-slider" id="caseSlider">
+        <div class="case-slider-track" id="caseSliderTrack"></div>
+        <button class="case-slider-nav prev" id="caseSlidePrev" type="button" aria-label="Imagen anterior">&#8249;</button>
+        <button class="case-slider-nav next" id="caseSlideNext" type="button" aria-label="Imagen siguiente">&#8250;</button>
+      </div>
       <div class="case-body">
         <button class="case-close" id="caseClose" type="button">&#8592; Cerrar caso</button>
         <div class="case-head">
@@ -935,6 +970,9 @@
       </div>
     </div>
   </div>
+
+  <!-- TODO: sección "Comercio" pendiente de construir -->
+  <span id="comercio" aria-hidden="true"></span>
 
   <!-- ================= PRICING ================= -->
   <section class="pricing" id="paquetes">
@@ -1076,8 +1114,9 @@
         <div>
           <div class="footer-col-label">Navegación</div>
           <ul class="footer-links">
-            <li><a href="#portafolio">Portafolio</a></li>
             <li><a href="#paquetes">Paquetes de branding</a></li>
+            <li><a href="#portafolio">Proyectos</a></li>
+            <li><a href="#comercio">Comercio</a></li>
             <li><a href="#uiux">Diseño UI/UX</a></li>
           </ul>
         </div>
@@ -1115,7 +1154,7 @@
   revealEls.forEach(el => io.observe(el));
 
   // Portfolio: filters + case study drawer
-  const PROJECTS = [{"name": "Croomie", "year": "2025", "tag": "Branding + Packaging", "cats": ["Branding", "Packaging"], "brief": "Identidad de marca extendida al empaque: el mismo lenguaje visual resuelto en etiquetas, cajas y aplicaciones físicas, listo para producción.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico", "Aplicación en empaque"], "palette": ["#a0aacb", "#26211e", "#010000", "#7b7a82"]}, {"name": "Trivium Barber Club", "year": "2024", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#0f6158", "#4f3f36", "#8a817d", "#fbfcfb"]}, {"name": "Twins Beauty Salon &amp; Barber", "year": "2024", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#ac866e", "#fcecdf", "#cab8a6", "#7a5939"]}, {"name": "Gustossia", "year": "2023", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#71684c", "#bba68d", "#0d0b04", "#433b2e"]}, {"name": "Velmora Beauty", "year": "2023", "tag": "Identidad de marca + UI/UX", "cats": ["Branding", "UI/UX"], "brief": "La identidad de marca traducida a una experiencia digital coherente, donde cada pantalla se siente una extensión natural del sistema visual.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico", "Diseño de interfaz UI/UX"], "palette": ["#5c272c", "#e9c4cd", "#1d100e", "#a96569"]}, {"name": "Saga", "year": "2022", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#d16c55", "#c9beb0", "#77463a", "#f8f6f6"]}];
+  const PROJECTS = [{"name": "Croomie", "year": "2025", "tag": "Branding + Packaging", "cats": ["Branding", "Packaging"], "brief": "Identidad de marca extendida al empaque: el mismo lenguaje visual resuelto en etiquetas, cajas y aplicaciones físicas, listo para producción.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico", "Aplicación en empaque"], "palette": ["#a0aacb", "#26211e", "#010000", "#7b7a82"], "images": [{"src": "assets/images/imagenes landing-01.png", "alt": "Empaque de la marca Croomie", "caption": "Empaque de la marca Croomie"}]}, {"name": "Trivium Barber Club", "year": "2024", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#0f6158", "#4f3f36", "#8a817d", "#fbfcfb"], "images": [{"src": "assets/images/imagenes landing-02.png", "alt": "Señalética de Trivium Barber Club", "caption": "Señalética de Trivium Barber Club"}]}, {"name": "Twins Beauty Salon &amp; Barber", "year": "2024", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#ac866e", "#fcecdf", "#cab8a6", "#7a5939"], "images": [{"src": "assets/images/imagenes landing-03.png", "alt": "Papelería de Twins Beauty Salon & Barber", "caption": "Papelería de Twins Beauty Salon & Barber"}]}, {"name": "Gustossia", "year": "2023", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#71684c", "#bba68d", "#0d0b04", "#433b2e"], "images": [{"src": "assets/images/imagenes landing-04.png", "alt": "Fachada de la tienda Gustossia", "caption": "Fachada de la tienda Gustossia"}]}, {"name": "Velmora Beauty", "year": "2023", "tag": "Identidad de marca + UI/UX", "cats": ["Branding", "UI/UX"], "brief": "La identidad de marca traducida a una experiencia digital coherente, donde cada pantalla se siente una extensión natural del sistema visual.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico", "Diseño de interfaz UI/UX"], "palette": ["#5c272c", "#e9c4cd", "#1d100e", "#a96569"], "images": [{"src": "assets/images/imagenes landing-05.png", "alt": "Bolsa de tela de Velmora Beauty", "caption": "Bolsa de tela de Velmora Beauty"}]}, {"name": "Saga", "year": "2022", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#d16c55", "#c9beb0", "#77463a", "#f8f6f6"], "images": [{"src": "assets/images/imagenes landing-06.png", "alt": "Mockup del sitio web de Saga", "caption": "Mockup del sitio web de Saga"}]}];
   const grid = document.getElementById('portfolioGrid');
   const cards = Array.from(grid.querySelectorAll('.p-card'));
   const filterPills = document.querySelectorAll('.filter-pill');
@@ -1133,7 +1172,6 @@
   });
 
   const overlay = document.getElementById('caseOverlay');
-  const caseImg = document.getElementById('caseImg');
   const caseName = document.getElementById('caseName');
   const caseYear = document.getElementById('caseYear');
   const caseTag = document.getElementById('caseTag');
@@ -1141,13 +1179,35 @@
   const casePalette = document.getElementById('casePalette');
   const caseDeliverables = document.getElementById('caseDeliverables');
   const caseClose = document.getElementById('caseClose');
+  const caseSliderTrack = document.getElementById('caseSliderTrack');
+  const caseSlidePrev = document.getElementById('caseSlidePrev');
+  const caseSlideNext = document.getElementById('caseSlideNext');
+
+  function scrollGallery(dir) {
+    caseSliderTrack.scrollBy({ left: dir * caseSliderTrack.clientWidth * 0.8, behavior: 'smooth' });
+  }
+
+  function updateGalleryNav() {
+    const hasOverflow = caseSliderTrack.scrollWidth > caseSliderTrack.clientWidth + 4;
+    caseSlidePrev.hidden = caseSlideNext.hidden = !hasOverflow;
+  }
 
   function openCase(card) {
     const i = Number(card.dataset.index);
     const p = PROJECTS[i];
-    const img = card.querySelector('img');
-    caseImg.src = img.src;
-    caseImg.alt = img.alt;
+    const thumb = card.querySelector('img');
+    const slides = (p.images && p.images.length) ? p.images : [{ src: thumb.src, alt: thumb.alt, caption: '' }];
+
+    caseSliderTrack.innerHTML = slides.map(s => `
+      <div class="case-slide">
+        <img src="${s.src}" alt="${s.alt || ''}">
+        ${s.caption ? `<span class="case-slide-caption">${s.caption}</span>` : ''}
+      </div>`).join('');
+    caseSliderTrack.classList.toggle('single-slide', slides.length === 1);
+    caseSliderTrack.scrollLeft = 0;
+    caseSliderTrack.querySelectorAll('img').forEach(img => img.addEventListener('load', updateGalleryNav, { once: true }));
+    updateGalleryNav();
+
     caseName.textContent = p.name;
     caseYear.textContent = p.year;
     caseTag.textContent = p.tag;
@@ -1169,9 +1229,18 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCase(card); }
     });
   });
+  caseSlidePrev.addEventListener('click', () => scrollGallery(-1));
+  caseSlideNext.addEventListener('click', () => scrollGallery(1));
+  caseSliderTrack.addEventListener('scroll', () => { clearTimeout(caseSliderTrack._t); caseSliderTrack._t = setTimeout(updateGalleryNav, 100); });
+  window.addEventListener('resize', () => { if (overlay.classList.contains('open')) updateGalleryNav(); });
   caseClose.addEventListener('click', closeCase);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeCase(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCase(); });
+  document.addEventListener('keydown', (e) => {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeCase();
+    if (e.key === 'ArrowLeft') scrollGallery(-1);
+    if (e.key === 'ArrowRight') scrollGallery(1);
+  });
 </script>
 
 </body>
