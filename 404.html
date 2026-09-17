@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página no encontrada — Lina Castro Studio</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<style>
+  @font-face{
+    font-family:'futura-pt';
+    src:url('assets/fonts/futura-pt/futura-pt-book.woff2') format('woff2');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'futura-pt';
+    src:url('assets/fonts/futura-pt/futura-pt-demi.woff2') format('woff2');
+    font-weight:600; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'futura-pt';
+    src:url('assets/fonts/futura-pt/futura-pt-extrabold.woff2') format('woff2');
+    font-weight:800; font-style:normal; font-display:swap;
+  }
+  :root{
+    --cream:#e7d7f3; --wine:#6e1e4d; --wine-dark:#571640; --ink:#241a22; --muted:#786c74; --white:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background:var(--cream); color:var(--ink); text-align:center; padding:32px;
+    font-family:'futura-pt', -apple-system, sans-serif;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink);
+    font-weight:800; font-size:18px; margin-bottom:56px;
+  }
+  .brand-mark{
+    width:34px; height:34px; border-radius:50%; background:var(--wine); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800;
+  }
+  .brand .studio{ color:var(--wine); }
+  .sparkle{ color:var(--wine); margin-bottom:18px; }
+  .code{ font-size:15px; font-weight:600; letter-spacing:.08em; color:var(--wine); margin:0 0 10px; }
+  h1{ font-size:clamp(28px, 5vw, 44px); font-weight:800; margin:0 0 14px; max-width:560px; }
+  p{ color:var(--muted); font-size:16px; line-height:1.6; max-width:440px; margin:0 0 32px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--wine); color:#fff; text-decoration:none;
+    padding:14px 28px; border-radius:999px; font-weight:700; font-size:15px; transition:background .2s ease;
+  }
+  .btn:hover{ background:var(--wine-dark); }
+</style>
+</head>
+<body>
+  <a href="/" class="brand">
+    <span class="brand-mark">LC</span>
+    Lina Castro <span class="studio">Studio</span>
+  </a>
+
+  <svg class="sparkle" width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z"></path></svg>
+
+  <p class="code">Error 404</p>
+  <h1>Esta página no existe</h1>
+  <p>El enlace que seguiste puede estar roto o la página se movió de lugar. Volvamos a algo que sí exista.</p>
+  <a href="/" class="btn">Volver al inicio →</a>
+</body>
+</html>

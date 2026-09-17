@@ -113,7 +113,7 @@
   <header>
     <h1>Panel · Lina Castro Studio</h1>
     <div class="actions">
-      <a href="../../index.html" target="_blank" rel="noopener">Ver sitio ↗</a>
+      <a href="/index.html" target="_blank" rel="noopener">Ver sitio ↗</a>
       <button class="ghost" id="logoutBtn" type="button">Cerrar sesión</button>
     </div>
   </header>
@@ -132,20 +132,20 @@
   <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../assets/js/supabase-config.js"></script>
+<script src="/assets/js/supabase-config.js"></script>
 <script>
   const supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
 
   // ---- auth guard ----
   (async () => {
     const { data: { session } } = await supabaseClient.auth.getSession();
-    if (!session) { location.href = '../login/'; return; }
+    if (!session) { location.href = '/admin/login/'; return; }
     init();
   })();
 
   document.getElementById('logoutBtn').addEventListener('click', async () => {
     await supabaseClient.auth.signOut();
-    location.href = '../login/';
+    location.href = '/admin/login/';
   });
 
   // ---- data layer (Supabase) ----
@@ -177,8 +177,8 @@
 
   function resolveSrc(src) {
     if (!src) return '';
-    if (src.startsWith('data:') || src.startsWith('http') || src.startsWith('..')) return src;
-    return '../../' + src;
+    if (src.startsWith('data:') || src.startsWith('http') || src.startsWith('/')) return src;
+    return '/' + src;
   }
 
   let projects = [];

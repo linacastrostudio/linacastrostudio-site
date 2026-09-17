@@ -51,13 +51,13 @@
     </form>
   </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../assets/js/supabase-config.js"></script>
+<script src="/assets/js/supabase-config.js"></script>
 <script>
   const supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
 
   (async () => {
     const { data: { session } } = await supabaseClient.auth.getSession();
-    if (session) location.href = '../dashboard/';
+    if (session) location.href = '/admin/dashboard/';
   })();
 
   const submitBtn = document.getElementById('submitBtn');
@@ -76,7 +76,7 @@
       submitBtn.disabled = false;
       submitBtn.textContent = 'Entrar';
     } else {
-      location.href = '../dashboard/';
+      location.href = '/admin/dashboard/';
     }
   });
 </script>
