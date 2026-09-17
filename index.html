@@ -46,8 +46,8 @@
     font-weight:900; font-style:normal; font-display:swap;
   }
   :root{
-    --cream:#fdeee1;
-    --cream-2:#fff6ee;
+    --cream:#e7d7f3;
+    --cream-2:#e7d7f3;
     --wine:#6e1e4d;
     --wine-dark:#571640;
     --wine-soft:#8a3560;
@@ -174,7 +174,7 @@
     position:sticky;
     top:0;
     z-index:100;
-    background:rgba(253,238,225,0.86);
+    background:rgba(231,215,243,0.86);
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
     border-bottom:1px solid rgba(110,30,77,0.08);
@@ -341,7 +341,7 @@
   /* Stats */
   .stats-wrap{ margin-top:56px; }
   .stats{
-    background:linear-gradient(120deg, var(--lilac-bg), var(--lilac-soft));
+    background:var(--white);
     border-radius:26px;
     padding:34px 60px;
     display:flex;
@@ -366,7 +366,7 @@
     transform:translateY(-50%);
     width:60px; height:60px;
     border-radius:50%;
-    background:var(--cream-2);
+    background:var(--white);
     box-shadow:var(--shadow-card);
     display:flex; align-items:center; justify-content:center;
   }
@@ -443,6 +443,15 @@
   .filter-pill.active{ background:var(--wine); border-color:var(--wine); color:#fff; }
   .grid-portfolio{ margin-top:32px; }
   .p-card[hidden]{ display:none; }
+  .portfolio-empty{
+    grid-column:1/-1; text-align:center; padding:64px 24px; border-radius:22px;
+    background:var(--white); box-shadow:var(--shadow-card);
+  }
+  .portfolio-empty span{
+    display:block; font-family:'futura-pt', sans-serif; font-weight:800; font-size:22px;
+    color:var(--wine); margin-bottom:8px;
+  }
+  .portfolio-empty p{ color:var(--muted); font-size:15px; margin:0; }
   .portfolio-more{ display:flex; justify-content:center; margin-top:48px; }
 
   /* Case study drawer */
@@ -459,28 +468,32 @@
     transform:scale(.96); opacity:0; transition:transform .35s ease, opacity .35s ease;
   }
   .case-overlay.open .case-panel{ transform:scale(1); opacity:1; }
-  .case-slider{ position:relative; background:#eee; }
+  .case-slider{ position:relative; background:var(--cream-2); padding:32px 40px 8px; border-radius:22px 22px 0 0; }
   .case-slider-track{
-    display:flex; gap:4px; height:min(56vh,460px); overflow-x:auto; overflow-y:hidden;
+    display:flex; gap:22px; overflow-x:auto; overflow-y:hidden; padding-bottom:46px;
     scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
   }
-  .case-slide{ position:relative; flex:0 0 auto; height:100%; scroll-snap-align:start; }
-  .case-slide img{ height:100%; width:auto; max-width:none; object-fit:cover; display:block; }
-  .case-slider-track.single-slide .case-slide{ flex:0 0 100%; }
-  .case-slider-track.single-slide .case-slide img{ width:100%; }
+  .case-slider-track.fits{ justify-content:center; }
+  .case-slide{ display:flex; flex-direction:column; gap:12px; flex:0 0 auto; width:300px; scroll-snap-align:start; }
+  .case-slide .slide-img{
+    width:300px; height:300px; border-radius:16px; overflow:hidden; background:#eee;
+    box-shadow:0 16px 34px rgba(36,26,34,.16);
+  }
+  .case-slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .case-slider-track.single-slide{ display:block; }
+  .case-slider-track.single-slide .case-slide{ width:100%; }
+  .case-slider-track.single-slide .case-slide .slide-img{ width:100%; height:min(48vh,420px); }
   .case-slide-caption{
-    position:absolute; left:0; right:0; bottom:0; padding:14px 18px 12px;
-    font-size:12.5px; line-height:1.4; color:#fff; white-space:nowrap;
-    background:linear-gradient(to top, rgba(20,12,17,.72), rgba(20,12,17,0));
+    font-size:13px; font-style:italic; line-height:1.5; color:var(--muted); padding:0 2px;
   }
   .case-slider-nav{
-    position:absolute; top:50%; transform:translateY(-50%); z-index:2;
-    width:40px; height:40px; border-radius:999px; border:none; cursor:pointer;
+    position:absolute; top:32px; bottom:34px; z-index:2; display:flex; align-items:center;
+    width:40px; height:40px; border-radius:999px; border:none; cursor:pointer; margin:auto 0;
     background:rgba(255,255,255,.9); color:var(--wine); font-size:19px; line-height:1;
-    display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-card);
+    justify-content:center; box-shadow:var(--shadow-card);
     transition:background .18s ease, transform .18s ease;
   }
-  .case-slider-nav:hover{ background:#fff; transform:translateY(-50%) scale(1.06); }
+  .case-slider-nav:hover{ background:#fff; transform:scale(1.06); }
   .case-slider-nav.prev{ left:16px; }
   .case-slider-nav.next{ right:16px; }
   .case-slider-nav[hidden]{ display:none; }
@@ -553,6 +566,7 @@
   }
   .featured .price-icon{ background:rgba(255,255,255,0.14); color:#fff; }
   .price-card h3{ font-size:23px; font-weight:700; margin-bottom:14px; }
+  .featured h3{ color:var(--lilac-bg); }
   .price-card .desc{
     font-size:14.5px;
     line-height:1.6;
@@ -773,6 +787,11 @@
     .hero-actions .btn{ width:100%; }
     .grid-portfolio{ grid-template-columns:1fr; }
     .case-body{ padding:24px 24px 44px; }
+    .case-slider{ padding:20px 20px 8px; }
+    .case-slider-track{ gap:14px; }
+    .case-slide{ width:220px; }
+    .case-slide .slide-img{ width:220px; height:220px; }
+    .case-slider-nav{ top:20px; bottom:32px; }
     section{ padding:70px 0; }
     .rotor{ width:130px; height:130px; }
     .badge-pill{ font-size:12.5px; padding:9px 16px 9px 9px; }
@@ -905,38 +924,7 @@
         <button class="filter-pill" data-filter="UI/UX">UI/UX</button>
       </div>
 
-      <div class="grid-portfolio" id="portfolioGrid">
-        <div class="p-card reveal" data-index="0" data-cats="Branding,Packaging" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="thumb"><img src="assets/images/imagenes landing-01.png" alt="Empaque de la marca Croomie" loading="lazy"></div>
-          <div class="p-meta"><h3>Croomie</h3><span class="year">2025</span></div>
-          <span class="p-tag">Branding + Packaging</span>
-        </div>
-        <div class="p-card reveal" data-index="1" data-cats="Branding" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="thumb"><img src="assets/images/imagenes landing-02.png" alt="Señalética de Trivium Barber Club" loading="lazy"></div>
-          <div class="p-meta"><h3>Trivium Barber Club</h3><span class="year">2024</span></div>
-          <span class="p-tag">Identidad de marca</span>
-        </div>
-        <div class="p-card reveal" data-index="2" data-cats="Branding" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="thumb"><img src="assets/images/imagenes landing-03.png" alt="Papelería de Twins Beauty Salon & Barber" loading="lazy"></div>
-          <div class="p-meta"><h3>Twins Beauty Salon &amp; Barber</h3><span class="year">2024</span></div>
-          <span class="p-tag">Identidad de marca</span>
-        </div>
-        <div class="p-card reveal" data-index="3" data-cats="Branding" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="thumb"><img src="assets/images/imagenes landing-04.png" alt="Fachada de la tienda Gustossia" loading="lazy"></div>
-          <div class="p-meta"><h3>Gustossia</h3><span class="year">2023</span></div>
-          <span class="p-tag">Identidad de marca</span>
-        </div>
-        <div class="p-card reveal" data-index="4" data-cats="Branding,UI/UX" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="thumb"><img src="assets/images/imagenes landing-05.png" alt="Bolsa de tela de Velmora Beauty" loading="lazy"></div>
-          <div class="p-meta"><h3>Velmora Beauty</h3><span class="year">2023</span></div>
-          <span class="p-tag">Identidad de marca + UI/UX</span>
-        </div>
-        <div class="p-card reveal" data-index="5" data-cats="Branding" tabindex="0" role="button" aria-haspopup="dialog">
-          <div class="thumb"><img src="assets/images/imagenes landing-06.png" alt="Mockup del sitio web de Saga" loading="lazy"></div>
-          <div class="p-meta"><h3>Saga</h3><span class="year">2022</span></div>
-          <span class="p-tag">Identidad de marca</span>
-        </div>
-      </div>
+      <div class="grid-portfolio" id="portfolioGrid"></div>
 
       <div class="portfolio-more reveal">
         <button type="button" class="btn btn-outline" id="verPortafolioCompleto">Ver portafolio completo</button>
@@ -1133,6 +1121,8 @@
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-config.js"></script>
 <script>
   // Mobile nav
   const menuToggle = document.getElementById('menuToggle');
@@ -1142,18 +1132,92 @@
   menuClose.addEventListener('click', () => mobileNav.classList.remove('open'));
   mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
-  // Reveal on scroll
-  const revealEls = document.querySelectorAll('.reveal');
+  // Reveal on scroll (portfolio cards get observed after render, see renderGrid)
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.14 });
-  revealEls.forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Portfolio: filters + case study drawer
-  const PROJECTS = [{"name": "Croomie", "year": "2025", "tag": "Branding + Packaging", "cats": ["Branding", "Packaging"], "brief": "Identidad de marca extendida al empaque: el mismo lenguaje visual resuelto en etiquetas, cajas y aplicaciones físicas, listo para producción.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico", "Aplicación en empaque"], "palette": ["#a0aacb", "#26211e", "#010000", "#7b7a82"], "images": [{"src": "assets/images/imagenes landing-01.png", "alt": "Empaque de la marca Croomie", "caption": "Empaque de la marca Croomie"}]}, {"name": "Trivium Barber Club", "year": "2024", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#0f6158", "#4f3f36", "#8a817d", "#fbfcfb"], "images": [{"src": "assets/images/imagenes landing-02.png", "alt": "Señalética de Trivium Barber Club", "caption": "Señalética de Trivium Barber Club"}]}, {"name": "Twins Beauty Salon &amp; Barber", "year": "2024", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#ac866e", "#fcecdf", "#cab8a6", "#7a5939"], "images": [{"src": "assets/images/imagenes landing-03.png", "alt": "Papelería de Twins Beauty Salon & Barber", "caption": "Papelería de Twins Beauty Salon & Barber"}]}, {"name": "Gustossia", "year": "2023", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#71684c", "#bba68d", "#0d0b04", "#433b2e"], "images": [{"src": "assets/images/imagenes landing-04.png", "alt": "Fachada de la tienda Gustossia", "caption": "Fachada de la tienda Gustossia"}]}, {"name": "Velmora Beauty", "year": "2023", "tag": "Identidad de marca + UI/UX", "cats": ["Branding", "UI/UX"], "brief": "La identidad de marca traducida a una experiencia digital coherente, donde cada pantalla se siente una extensión natural del sistema visual.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico", "Diseño de interfaz UI/UX"], "palette": ["#5c272c", "#e9c4cd", "#1d100e", "#a96569"], "images": [{"src": "assets/images/imagenes landing-05.png", "alt": "Bolsa de tela de Velmora Beauty", "caption": "Bolsa de tela de Velmora Beauty"}]}, {"name": "Saga", "year": "2022", "tag": "Identidad de marca", "cats": ["Branding"], "brief": "Sistema de identidad completo — logotipo, paleta, tipografía y aplicaciones — pensado para que la marca se sienta igual de sólida en redes, en papelería y en el día a día del negocio.", "deliverables": ["Logotipo y variantes", "Paleta de color", "Tipografía de marca", "Manual de uso básico"], "palette": ["#d16c55", "#c9beb0", "#77463a", "#f8f6f6"], "images": [{"src": "assets/images/imagenes landing-06.png", "alt": "Mockup del sitio web de Saga", "caption": "Mockup del sitio web de Saga"}]}];
+  // Portfolio data comes from Supabase (see supabase/schema.sql). cover_image_url is the
+  // grid thumb + drawer fallback; project_images[] are the gallery/slide photos, each with
+  // its own description — separate from the cover, managed via admin/dashboard.html.
+  const supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+
+  function mapProjectRow(row) {
+    return {
+      id: row.id,
+      slug: row.slug,
+      title: row.title,
+      tag: row.tag,
+      categories: row.categories || [],
+      date: row.project_date,
+      brief: row.brief,
+      deliverables: row.deliverables || [],
+      palette: row.palette || [],
+      cover_image: row.cover_image_url,
+      cover_alt: row.cover_alt,
+      images: (row.project_images || [])
+        .slice()
+        .sort((a, b) => a.sort_order - b.sort_order)
+        .map(img => ({ src: img.image_url, alt: img.alt, description: img.description }))
+    };
+  }
+
+  async function loadProjects() {
+    const { data, error } = await supabaseClient
+      .from('projects')
+      .select('*, project_images(*)')
+      .eq('published', true)
+      .order('project_date', { ascending: false });
+    if (error) {
+      console.error('Error loading projects from Supabase:', error);
+      return [];
+    }
+    return data.map(mapProjectRow);
+  }
+
+  let PROJECTS = [];
   const grid = document.getElementById('portfolioGrid');
-  const cards = Array.from(grid.querySelectorAll('.p-card'));
   const filterPills = document.querySelectorAll('.filter-pill');
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function renderGrid(projects) {
+    const filtersEl = document.querySelector('.portfolio-filters');
+    if (!projects.length) {
+      if (filtersEl) filtersEl.hidden = true;
+      grid.innerHTML = `<div class="portfolio-empty reveal in">
+        <span>Próximamente</span>
+        <p>Estamos cargando los primeros casos del portafolio.</p>
+      </div>`;
+      return [];
+    }
+    if (filtersEl) filtersEl.hidden = false;
+    grid.innerHTML = projects.map((p, i) => `
+      <div class="p-card reveal" data-index="${i}" data-cats="${p.categories.join(',')}" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="thumb"><img src="${p.cover_image}" alt="${escapeHtml(p.cover_alt || p.title)}" loading="lazy"></div>
+        <div class="p-meta"><h3>${escapeHtml(p.title)}</h3><span class="year">${(p.date || '').slice(0, 4)}</span></div>
+        <span class="p-tag">${escapeHtml(p.tag)}</span>
+      </div>`).join('');
+    const newCards = Array.from(grid.querySelectorAll('.p-card'));
+    newCards.forEach(el => io.observe(el));
+    newCards.forEach(card => {
+      card.addEventListener('click', () => openCase(PROJECTS[Number(card.dataset.index)]));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCase(PROJECTS[Number(card.dataset.index)]); }
+      });
+    });
+    return newCards;
+  }
+
+  let cards = [];
+
+  (async () => {
+    PROJECTS = await loadProjects();
+    cards = renderGrid(PROJECTS);
+  })();
 
   filterPills.forEach(pill => {
     pill.addEventListener('click', () => {
@@ -1186,30 +1250,32 @@
   function updateGalleryNav() {
     const hasOverflow = caseSliderTrack.scrollWidth > caseSliderTrack.clientWidth + 4;
     caseSlidePrev.hidden = caseSlideNext.hidden = !hasOverflow;
+    // Center the row when every slide already fits (no scrolling needed);
+    // left-align once it overflows, so scroll-snap starts flush at slide 1.
+    caseSliderTrack.classList.toggle('fits', !hasOverflow);
   }
 
-  function openCase(card) {
-    const i = Number(card.dataset.index);
-    const p = PROJECTS[i];
-    const thumb = card.querySelector('img');
-    const slides = (p.images && p.images.length) ? p.images : [{ src: thumb.src, alt: thumb.alt, caption: '' }];
+  function openCase(p) {
+    // Cover is not part of the slide gallery — slides are only the extra photos
+    // added per project (each with its own description). No gallery photos yet = fallback to cover, no dup.
+    const gallery = (p.images && p.images.length) ? p.images : [{ src: p.cover_image, alt: p.cover_alt || p.title, description: '' }];
 
-    caseSliderTrack.innerHTML = slides.map(s => `
+    caseSliderTrack.innerHTML = gallery.map(s => `
       <div class="case-slide">
-        <img src="${s.src}" alt="${s.alt || ''}">
-        ${s.caption ? `<span class="case-slide-caption">${s.caption}</span>` : ''}
+        <div class="slide-img"><img src="${s.src}" alt="${escapeHtml(s.alt || '')}"></div>
+        ${s.description ? `<p class="case-slide-caption">${escapeHtml(s.description)}</p>` : ''}
       </div>`).join('');
-    caseSliderTrack.classList.toggle('single-slide', slides.length === 1);
+    caseSliderTrack.classList.toggle('single-slide', gallery.length === 1);
     caseSliderTrack.scrollLeft = 0;
     caseSliderTrack.querySelectorAll('img').forEach(img => img.addEventListener('load', updateGalleryNav, { once: true }));
     updateGalleryNav();
 
-    caseName.textContent = p.name;
-    caseYear.textContent = p.year;
+    caseName.textContent = p.title;
+    caseYear.textContent = (p.date || '').slice(0, 4);
     caseTag.textContent = p.tag;
     caseBrief.textContent = p.brief;
-    casePalette.innerHTML = p.palette.map(c => `<span style="background:${c}"></span>`).join('');
-    caseDeliverables.innerHTML = p.deliverables.map(d => `<li>${d}</li>`).join('');
+    casePalette.innerHTML = p.palette.map(c => `<span style="background:${escapeHtml(c)}"></span>`).join('');
+    caseDeliverables.innerHTML = p.deliverables.map(d => `<li>${escapeHtml(d)}</li>`).join('');
     overlay.classList.add('open');
     document.body.classList.add('case-open');
   }
@@ -1219,12 +1285,6 @@
     document.body.classList.remove('case-open');
   }
 
-  cards.forEach(card => {
-    card.addEventListener('click', () => openCase(card));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCase(card); }
-    });
-  });
   caseSlidePrev.addEventListener('click', () => scrollGallery(-1));
   caseSlideNext.addEventListener('click', () => scrollGallery(1));
   caseSliderTrack.addEventListener('scroll', () => { clearTimeout(caseSliderTrack._t); caseSliderTrack._t = setTimeout(updateGalleryNav, 100); });

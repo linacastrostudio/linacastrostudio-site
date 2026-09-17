@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel — Lina Castro Studio</title>
+<style>
+  :root{
+    --cream:#fdeee1; --cream-2:#fff6ee; --wine:#6e1e4d; --wine-dark:#571640;
+    --ink:#241a22; --muted:#786c74; --line: rgba(36,26,34,0.12); --white:#ffffff;
+    --danger:#a3231f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--cream-2); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  header{
+    background:var(--white); border-bottom:1px solid var(--line); padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:5;
+  }
+  header h1{ font-size:17px; margin:0; }
+  header .actions{ display:flex; gap:10px; align-items:center; }
+  header a, header button.ghost{
+    font-size:13.5px; color:var(--wine); text-decoration:none; background:none; border:1px solid var(--line);
+    padding:8px 14px; border-radius:8px; cursor:pointer; font-family:inherit;
+  }
+  header a:hover, header button.ghost:hover{ background:var(--cream); }
+  .proto-banner{
+    background:#3f2a37; color:#f4e9ef; font-size:12.5px; text-align:center; padding:7px 12px;
+  }
+  .layout{
+    display:grid; grid-template-columns:360px 1fr; gap:0; align-items:start;
+    max-width:1400px; margin:0 auto;
+  }
+  .list-panel{ padding:24px; border-right:1px solid var(--line); min-height:calc(100vh - 90px); background:var(--white); }
+  .list-panel h2{ font-size:14px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:0 0 14px; }
+  .new-btn{
+    width:100%; padding:11px; border:2px dashed var(--wine); border-radius:10px; background:none;
+    color:var(--wine); font-weight:600; font-size:14px; cursor:pointer; margin-bottom:18px; font-family:inherit;
+  }
+  .new-btn:hover{ background:var(--cream); }
+  .proj-row{
+    display:flex; gap:10px; align-items:center; padding:10px; border-radius:12px; cursor:pointer;
+    border:1px solid transparent; margin-bottom:6px;
+  }
+  .proj-row:hover{ background:var(--cream-2); }
+  .proj-row.active{ border-color:var(--wine); background:var(--cream); }
+  .proj-row .thumb{ width:48px; height:48px; border-radius:8px; overflow:hidden; background:#eee; flex:0 0 auto; }
+  .proj-row .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .proj-row .meta{ flex:1; min-width:0; }
+  .proj-row .meta strong{ display:block; font-size:13.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .proj-row .meta span{ display:block; font-size:11.5px; color:var(--muted); }
+  .proj-row .pub-dot{ width:8px; height:8px; border-radius:50%; background:#2f8a4b; flex:0 0 auto; }
+  .proj-row .pub-dot.off{ background:#bbb; }
+  .form-panel{ padding:28px 36px 80px; }
+  .form-panel h2{ font-size:20px; margin:0 0 4px; }
+  .empty-state{ color:var(--muted); font-size:14px; padding:60px 0; text-align:center; }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:12.5px; font-weight:700; margin-bottom:6px; color:var(--ink); }
+  .hint{ font-size:11.5px; color:var(--muted); margin-top:4px; }
+  input[type=text], input[type=date], textarea{
+    width:100%; padding:10px 13px; border:1px solid var(--line); border-radius:9px;
+    font-size:14px; font-family:inherit; background:var(--white);
+  }
+  textarea{ resize:vertical; min-height:70px; line-height:1.5; }
+  input:focus, textarea:focus{ outline:2px solid var(--wine); outline-offset:1px; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .row3{ display:grid; grid-template-columns:2fr 1fr; gap:16px; }
+  .checks{ display:flex; gap:16px; flex-wrap:wrap; }
+  .checks label{ display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:500; }
+  .swatches{ display:flex; gap:8px; margin-top:8px; }
+  .swatches span{ width:28px; height:28px; border-radius:7px; border:1px solid var(--line); }
+  .cover-box{ display:flex; gap:16px; align-items:center; }
+  .cover-box .preview{ width:120px; height:90px; border-radius:10px; overflow:hidden; background:#eee; flex:0 0 auto; }
+  .cover-box .preview img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .gallery-list{ display:flex; flex-direction:column; gap:10px; margin-top:10px; }
+  .gallery-item{
+    display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line); border-radius:10px; padding:10px;
+    background:var(--white);
+  }
+  .gallery-item img{ width:72px; height:72px; object-fit:cover; border-radius:8px; flex:0 0 auto; background:#eee; }
+  .gallery-item .gcol{ flex:1; min-width:0; }
+  .gallery-item input{ margin-bottom:6px; }
+  .gallery-item .gbtns{ display:flex; gap:6px; }
+  .gallery-item .gbtns button{
+    border:1px solid var(--line); background:var(--white); border-radius:6px; padding:4px 8px; font-size:12px; cursor:pointer;
+  }
+  .gallery-item .gbtns button:hover{ background:var(--cream); }
+  .file-btn{
+    display:inline-block; border:1px solid var(--line); border-radius:8px; padding:9px 14px; font-size:13.5px;
+    cursor:pointer; background:var(--white);
+  }
+  .file-btn:hover{ background:var(--cream); }
+  .file-btn input{ display:none; }
+  .toolbar{ display:flex; gap:10px; margin-top:28px; padding-top:20px; border-top:1px solid var(--line); }
+  .btn{ padding:11px 20px; border-radius:9px; font-size:14px; font-weight:600; cursor:pointer; border:none; font-family:inherit; }
+  .btn-primary{ background:var(--wine); color:#fff; }
+  .btn-primary:hover{ background:var(--wine-dark); }
+  .btn-outline{ background:none; border:1px solid var(--line); color:var(--ink); }
+  .btn-outline:hover{ background:var(--cream); }
+  .btn-danger{ background:none; border:1px solid var(--danger); color:var(--danger); margin-left:auto; }
+  .btn-danger:hover{ background:#fbeceb; }
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0;
+    background:var(--ink); color:#fff; padding:11px 20px; border-radius:10px; font-size:13.5px;
+    transition:all .25s ease; pointer-events:none; z-index:20;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Panel · Lina Castro Studio</h1>
+    <div class="actions">
+      <a href="../index.html" target="_blank" rel="noopener">Ver sitio ↗</a>
+      <button class="ghost" id="logoutBtn" type="button">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="list-panel">
+      <h2>Proyectos</h2>
+      <button class="new-btn" id="newBtn" type="button">+ Nuevo proyecto</button>
+      <div id="projList"></div>
+    </div>
+    <div class="form-panel" id="formPanel">
+      <div class="empty-state">Elegí un proyecto de la lista o creá uno nuevo.</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/supabase-config.js"></script>
+<script>
+  const supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+
+  // ---- auth guard ----
+  (async () => {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) { location.href = 'login.html'; return; }
+    init();
+  })();
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await supabaseClient.auth.signOut();
+    location.href = 'login.html';
+  });
+
+  // ---- data layer (Supabase) ----
+  function mapProjectRow(row) {
+    return {
+      id: row.id, slug: row.slug, title: row.title, tag: row.tag,
+      categories: row.categories || [], date: row.project_date, brief: row.brief,
+      deliverables: row.deliverables || [], palette: row.palette || [],
+      cover_image: row.cover_image_url, cover_alt: row.cover_alt || '',
+      published: row.published,
+      images: (row.project_images || [])
+        .slice()
+        .sort((a, b) => a.sort_order - b.sort_order)
+        .map(img => ({ src: img.image_url, alt: img.alt, description: img.description }))
+    };
+  }
+
+  async function fetchProjects() {
+    const { data, error } = await supabaseClient
+      .from('projects')
+      .select('*, project_images(*)')
+      .order('project_date', { ascending: false });
+    if (error) {
+      showToast('Error cargando proyectos: ' + error.message);
+      return [];
+    }
+    return data.map(mapProjectRow);
+  }
+
+  function resolveSrc(src) {
+    if (!src) return '';
+    if (src.startsWith('data:') || src.startsWith('http') || src.startsWith('../')) return src;
+    return '../' + src;
+  }
+
+  let projects = [];
+  let selectedId = null; // null = nothing selected, 'new' = creating
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function slugify(s) {
+    return String(s || '').toLowerCase().trim()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  function uniqueSlug(base, ignoreId) {
+    let slug = base || 'proyecto';
+    let n = 2;
+    while (projects.some(p => p.slug === slug && p.id !== ignoreId)) {
+      slug = `${base}-${n++}`;
+    }
+    return slug;
+  }
+
+  function fileToDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result);
+      r.onerror = reject;
+      r.readAsDataURL(file);
+    });
+  }
+
+  // Downscale + re-compress to JPEG before upload — keeps Storage usage and page weight sane.
+  async function fileToCompressedBlob(file, maxDim = 1600, quality = 0.82) {
+    const rawDataUrl = await fileToDataUrl(file);
+    const img = await new Promise((resolve, reject) => {
+      const el = new Image();
+      el.onload = () => resolve(el);
+      el.onerror = reject;
+      el.src = rawDataUrl;
+    });
+    const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+    const w = Math.round(img.width * scale);
+    const h = Math.round(img.height * scale);
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+    return new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+  }
+
+  async function uploadImage(file) {
+    const blob = await fileToCompressedBlob(file);
+    const path = `${crypto.randomUUID()}.jpg`;
+    const { error } = await supabaseClient.storage.from('project-images').upload(path, blob, {
+      contentType: 'image/jpeg', upsert: false
+    });
+    if (error) throw error;
+    return supabaseClient.storage.from('project-images').getPublicUrl(path).data.publicUrl;
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._h);
+    t._h = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  const CATEGORY_OPTIONS = ['Branding', 'Packaging', 'UI/UX'];
+  const emptyProject = () => ({
+    id: null, slug: '', title: '', tag: '', categories: [], date: new Date().toISOString().slice(0, 10),
+    brief: '', deliverables: [], palette: [], cover_image: '', cover_alt: '', images: [], published: true
+  });
+
+  let formState = null; // working copy of the project being edited
+
+  function renderList() {
+    const wrap = document.getElementById('projList');
+    const sorted = projects.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    if (!sorted.length) {
+      wrap.innerHTML = '<p class="hint">Todavía no hay proyectos cargados.</p>';
+      return;
+    }
+    wrap.innerHTML = sorted.map(p => `
+      <div class="proj-row ${p.id === selectedId ? 'active' : ''}" data-id="${escapeHtml(p.id)}">
+        <div class="thumb">${p.cover_image ? `<img src="${resolveSrc(p.cover_image)}" alt="">` : ''}</div>
+        <div class="meta">
+          <strong>${escapeHtml(p.title || '(sin título)')}</strong>
+          <span>${(p.date || '').slice(0, 4)} · ${escapeHtml(p.tag || '')}</span>
+        </div>
+        <div class="pub-dot ${p.published === false ? 'off' : ''}" title="${p.published === false ? 'Oculto' : 'Publicado'}"></div>
+      </div>`).join('');
+    wrap.querySelectorAll('.proj-row').forEach(row => {
+      row.addEventListener('click', () => selectProject(row.dataset.id));
+    });
+  }
+
+  function selectProject(id) {
+    const p = projects.find(x => x.id === id);
+    if (!p) return;
+    selectedId = id;
+    formState = JSON.parse(JSON.stringify(p));
+    renderList();
+    renderForm();
+  }
+
+  function startNew() {
+    selectedId = 'new';
+    formState = emptyProject();
+    renderList();
+    renderForm();
+  }
+  document.getElementById('newBtn').addEventListener('click', startNew);
+
+  function renderForm() {
+    const panel = document.getElementById('formPanel');
+    if (!formState) {
+      panel.innerHTML = '<div class="empty-state">Elegí un proyecto de la lista o creá uno nuevo.</div>';
+      return;
+    }
+    const isNew = selectedId === 'new';
+    panel.innerHTML = `
+      <h2>${isNew ? 'Nuevo proyecto' : 'Editar proyecto'}</h2>
+      <p class="hint">${isNew ? 'Se guarda al tocar Guardar.' : 'ID: ' + escapeHtml(formState.slug)}</p>
+
+      <div class="field" style="margin-top:20px;">
+        <label>Título</label>
+        <input type="text" id="f_title" value="${escapeHtml(formState.title)}" placeholder="Ej: Croomie">
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Fecha del proyecto</label>
+          <input type="date" id="f_date" value="${escapeHtml(formState.date)}">
+          <p class="hint">Define el orden en el portafolio (más reciente primero).</p>
+        </div>
+        <div class="field">
+          <label><input type="checkbox" id="f_published" ${formState.published !== false ? 'checked' : ''}> Publicado en el sitio</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Categorías</label>
+        <div class="checks">
+          ${CATEGORY_OPTIONS.map(c => `<label><input type="checkbox" class="f_cat" value="${c}" ${formState.categories.includes(c) ? 'checked' : ''}> ${c}</label>`).join('')}
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Tag (texto que se ve en la card)</label>
+        <input type="text" id="f_tag" value="${escapeHtml(formState.tag)}" placeholder="Ej: Identidad de marca">
+      </div>
+
+      <div class="field">
+        <label>Brief (descripción del caso)</label>
+        <textarea id="f_brief" placeholder="Qué se hizo y por qué...">${escapeHtml(formState.brief)}</textarea>
+      </div>
+
+      <div class="field">
+        <label>Entregables (uno por línea)</label>
+        <textarea id="f_deliverables" placeholder="Logotipo y variantes&#10;Paleta de color">${escapeHtml((formState.deliverables || []).join('\n'))}</textarea>
+      </div>
+
+      <div class="field">
+        <label>Paleta (colores hex, separados por coma)</label>
+        <input type="text" id="f_palette" value="${escapeHtml((formState.palette || []).join(', '))}" placeholder="#a0aacb, #26211e">
+        <div class="swatches" id="paletteSwatches"></div>
+      </div>
+
+      <div class="field">
+        <label>Imagen de portada (grid + fallback del caso)</label>
+        <div class="cover-box">
+          <div class="preview" id="coverPreview">${formState.cover_image ? `<img src="${resolveSrc(formState.cover_image)}" alt="">` : ''}</div>
+          <label class="file-btn">Subir portada<input type="file" id="f_cover" accept="image/*"></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Galería / slides (cada imagen con su propia descripción)</label>
+        <div class="gallery-list" id="galleryList"></div>
+        <label class="file-btn" style="margin-top:10px;">+ Agregar imagen a la galería<input type="file" id="f_addImage" accept="image/*"></label>
+        <p class="hint">Estas son las fotos del slider horizontal dentro del caso — distintas de la portada.</p>
+      </div>
+
+      <div class="toolbar">
+        <button class="btn btn-primary" id="saveBtn" type="button">Guardar</button>
+        <button class="btn btn-outline" id="cancelBtn" type="button">Cancelar</button>
+        ${!isNew ? '<button class="btn btn-danger" id="deleteBtn" type="button">Eliminar proyecto</button>' : ''}
+      </div>
+    `;
+
+    renderPaletteSwatches();
+    renderGallery();
+
+    document.getElementById('f_palette').addEventListener('input', renderPaletteSwatches);
+    document.getElementById('f_cover').addEventListener('change', onCoverFile);
+    document.getElementById('f_addImage').addEventListener('change', onAddGalleryImage);
+    document.getElementById('saveBtn').addEventListener('click', saveForm);
+    document.getElementById('cancelBtn').addEventListener('click', () => { selectedId = null; formState = null; renderList(); renderForm(); });
+    const delBtn = document.getElementById('deleteBtn');
+    if (delBtn) delBtn.addEventListener('click', deleteCurrent);
+  }
+
+  function renderPaletteSwatches() {
+    const val = document.getElementById('f_palette').value;
+    const colors = val.split(',').map(s => s.trim()).filter(Boolean);
+    document.getElementById('paletteSwatches').innerHTML = colors.map(c => `<span style="background:${escapeHtml(c)}"></span>`).join('');
+  }
+
+  async function onCoverFile(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    showToast('Subiendo portada…');
+    try {
+      const url = await uploadImage(file);
+      formState.cover_image = url;
+      formState.cover_alt = formState.title;
+      document.getElementById('coverPreview').innerHTML = `<img src="${url}" alt="">`;
+      showToast('Portada subida');
+    } catch (err) {
+      showToast('Error subiendo imagen: ' + err.message);
+    }
+  }
+
+  async function onAddGalleryImage(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    showToast('Subiendo imagen…');
+    try {
+      const url = await uploadImage(file);
+      formState.images.push({ src: url, alt: formState.title, description: '' });
+      e.target.value = '';
+      renderGallery();
+      showToast('Imagen agregada');
+    } catch (err) {
+      showToast('Error subiendo imagen: ' + err.message);
+    }
+  }
+
+  function renderGallery() {
+    const wrap = document.getElementById('galleryList');
+    if (!formState.images.length) {
+      wrap.innerHTML = '<p class="hint">Sin imágenes de galería todavía — el caso muestra la portada como único slide.</p>';
+      return;
+    }
+    wrap.innerHTML = formState.images.map((img, i) => `
+      <div class="gallery-item" data-i="${i}">
+        <img src="${resolveSrc(img.src)}" alt="">
+        <div class="gcol">
+          <input type="text" class="g_desc" data-i="${i}" value="${escapeHtml(img.description)}" placeholder="Descripción de esta foto...">
+          <div class="gbtns">
+            <button type="button" class="g_up" data-i="${i}" ${i === 0 ? 'disabled' : ''}>↑</button>
+            <button type="button" class="g_down" data-i="${i}" ${i === formState.images.length - 1 ? 'disabled' : ''}>↓</button>
+            <button type="button" class="g_del" data-i="${i}">Eliminar</button>
+          </div>
+        </div>
+      </div>`).join('');
+    wrap.querySelectorAll('.g_desc').forEach(el => el.addEventListener('input', e => {
+      formState.images[Number(e.target.dataset.i)].description = e.target.value;
+    }));
+    wrap.querySelectorAll('.g_up').forEach(el => el.addEventListener('click', e => {
+      const i = Number(e.target.dataset.i);
+      [formState.images[i - 1], formState.images[i]] = [formState.images[i], formState.images[i - 1]];
+      renderGallery();
+    }));
+    wrap.querySelectorAll('.g_down').forEach(el => el.addEventListener('click', e => {
+      const i = Number(e.target.dataset.i);
+      [formState.images[i + 1], formState.images[i]] = [formState.images[i], formState.images[i + 1]];
+      renderGallery();
+    }));
+    wrap.querySelectorAll('.g_del').forEach(el => el.addEventListener('click', e => {
+      formState.images.splice(Number(e.target.dataset.i), 1);
+      renderGallery();
+    }));
+  }
+
+  async function saveForm() {
+    const title = document.getElementById('f_title').value.trim();
+    if (!title) { showToast('Falta el título'); return; }
+    const date = document.getElementById('f_date').value;
+    if (!date) { showToast('Falta la fecha'); return; }
+
+    formState.title = title;
+    formState.date = date;
+    formState.published = document.getElementById('f_published').checked;
+    formState.categories = Array.from(document.querySelectorAll('.f_cat:checked')).map(c => c.value);
+    formState.tag = document.getElementById('f_tag').value.trim() || formState.categories.join(' + ') || 'Identidad de marca';
+    formState.brief = document.getElementById('f_brief').value.trim();
+    formState.deliverables = document.getElementById('f_deliverables').value.split('\n').map(s => s.trim()).filter(Boolean);
+    formState.palette = document.getElementById('f_palette').value.split(',').map(s => s.trim()).filter(Boolean);
+
+    const saveBtn = document.getElementById('saveBtn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Guardando…';
+
+    const isNew = selectedId === 'new';
+    const payload = {
+      title: formState.title,
+      tag: formState.tag,
+      categories: formState.categories,
+      project_date: formState.date,
+      brief: formState.brief,
+      deliverables: formState.deliverables,
+      palette: formState.palette,
+      cover_image_url: formState.cover_image || null,
+      cover_alt: formState.cover_alt || '',
+      published: formState.published
+    };
+    if (isNew) {
+      payload.slug = uniqueSlug(slugify(title), null);
+    }
+
+    let projectId = formState.id;
+    if (isNew) {
+      const { data, error } = await supabaseClient.from('projects').insert(payload).select().single();
+      if (error) { showToast('Error guardando: ' + error.message); saveBtn.disabled = false; saveBtn.textContent = 'Guardar'; return; }
+      projectId = data.id;
+    } else {
+      const { error } = await supabaseClient.from('projects').update(payload).eq('id', projectId);
+      if (error) { showToast('Error guardando: ' + error.message); saveBtn.disabled = false; saveBtn.textContent = 'Guardar'; return; }
+    }
+
+    // Simplest reconciliation: replace the whole gallery each save (small image counts, no need to diff).
+    const { error: delErr } = await supabaseClient.from('project_images').delete().eq('project_id', projectId);
+    if (!delErr && formState.images.length) {
+      const rows = formState.images.map((img, i) => ({
+        project_id: projectId, image_url: img.src, alt: img.alt || '', description: img.description || '', sort_order: i
+      }));
+      await supabaseClient.from('project_images').insert(rows);
+    }
+
+    projects = await fetchProjects();
+    selectedId = projectId;
+    formState = JSON.parse(JSON.stringify(projects.find(p => p.id === projectId)));
+    renderList();
+    renderForm();
+    showToast('Guardado');
+  }
+
+  async function deleteCurrent() {
+    if (!confirm(`¿Eliminar "${formState.title}"? Esta acción no se puede deshacer.`)) return;
+    const { error } = await supabaseClient.from('projects').delete().eq('id', selectedId);
+    if (error) { showToast('Error eliminando: ' + error.message); return; }
+    projects = await fetchProjects();
+    selectedId = null;
+    formState = null;
+    renderList();
+    renderForm();
+    showToast('Proyecto eliminado');
+  }
+
+  async function init() {
+    projects = await fetchProjects();
+    renderList();
+    renderForm();
+  }
+</script>
+</body>
+</html>

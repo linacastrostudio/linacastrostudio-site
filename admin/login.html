@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acceso — Lina Castro Studio</title>
+<style>
+  :root{
+    --cream:#fdeee1; --wine:#6e1e4d; --wine-dark:#571640; --ink:#241a22;
+    --muted:#786c74; --line: rgba(36,26,34,0.12); --white:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:var(--cream); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    padding:24px;
+  }
+  .card{
+    background:var(--white); border-radius:20px; padding:40px 36px; width:100%; max-width:380px;
+    box-shadow:0 20px 60px rgba(36,26,34,0.12);
+  }
+  h1{ font-size:22px; margin:0 0 6px; }
+  .sub{ color:var(--muted); font-size:14px; margin:0 0 28px; line-height:1.5; }
+  label{ display:block; font-size:13px; font-weight:600; margin-bottom:6px; }
+  input{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:10px;
+    font-size:15px; margin-bottom:16px; font-family:inherit;
+  }
+  input:focus{ outline:2px solid var(--wine); outline-offset:1px; }
+  button{
+    width:100%; padding:12px; border:none; border-radius:10px; background:var(--wine); color:#fff;
+    font-size:15px; font-weight:600; cursor:pointer; font-family:inherit;
+  }
+  button:hover{ background:var(--wine-dark); }
+  .err{ color:#a3231f; font-size:13px; margin:-8px 0 16px; display:none; }
+  button[disabled]{ opacity:.6; cursor:default; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Lina Castro Studio</h1>
+    <p class="sub">Panel de administración — portafolio</p>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" autocomplete="username" required>
+      <label for="pass">Contraseña</label>
+      <input type="password" id="pass" autocomplete="current-password" required>
+      <p class="err" id="err">Email o contraseña incorrectos.</p>
+      <button type="submit" id="submitBtn">Entrar</button>
+    </form>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../assets/js/supabase-config.js"></script>
+<script>
+  const supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+
+  (async () => {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (session) location.href = 'dashboard.html';
+  })();
+
+  const submitBtn = document.getElementById('submitBtn');
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const pass = document.getElementById('pass').value;
+    const err = document.getElementById('err');
+    err.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Entrando…';
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password: pass });
+    if (error) {
+      err.textContent = error.message === 'Invalid login credentials' ? 'Email o contraseña incorrectos.' : error.message;
+      err.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Entrar';
+    } else {
+      location.href = 'dashboard.html';
+    }
+  });
+</script>
+</body>
+</html>
