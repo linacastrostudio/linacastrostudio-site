@@ -213,7 +213,17 @@
     });
   }
 
-  // Downscale + re-compress to JPEG before upload — keeps Storage usage and page weight sane.
+  function canvasHasAlpha(ctx, w, h) {
+    const { data } = ctx.getImageData(0, 0, w, h);
+    for (let i = 3; i < data.length; i += 4) {
+      if (data[i] < 255) return true;
+    }
+    return false;
+  }
+
+  // Downscale + re-compress before upload — keeps Storage usage and page weight sane.
+  // JPEG can't carry transparency, so a logo/PNG with an alpha channel is kept as PNG
+  // (bigger, but doesn't get its transparent background flattened to solid white/black).
   async function fileToCompressedBlob(file, maxDim = 1600, quality = 0.82) {
     const rawDataUrl = await fileToDataUrl(file);
     const img = await new Promise((resolve, reject) => {
@@ -228,15 +238,23 @@
     const canvas = document.createElement('canvas');
     canvas.width = w;
     canvas.height = h;
-    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-    return new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+
+    const mayHaveAlpha = ['image/png', 'image/webp', 'image/gif'].includes(file.type);
+    if (mayHaveAlpha && canvasHasAlpha(ctx, w, h)) {
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      return { blob, ext: 'png', contentType: 'image/png' };
+    }
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', quality));
+    return { blob, ext: 'jpg', contentType: 'image/jpeg' };
   }
 
   async function uploadImage(file) {
-    const blob = await fileToCompressedBlob(file);
-    const path = `${crypto.randomUUID()}.jpg`;
+    const { blob, ext, contentType } = await fileToCompressedBlob(file);
+    const path = `${crypto.randomUUID()}.${ext}`;
     const { error } = await supabaseClient.storage.from('project-images').upload(path, blob, {
-      contentType: 'image/jpeg', upsert: false
+      contentType, upsert: false
     });
     if (error) throw error;
     return supabaseClient.storage.from('project-images').getPublicUrl(path).data.publicUrl;

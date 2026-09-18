@@ -470,7 +470,6 @@
     color:var(--wine); margin-bottom:8px;
   }
   .portfolio-empty p{ color:var(--muted); font-size:15px; margin:0; }
-  .portfolio-more{ display:flex; justify-content:center; margin-top:48px; }
 
   /* Case study drawer */
   .case-overlay{
@@ -951,10 +950,6 @@
         <button class="portfolio-nav prev" id="portfolioPrev" type="button" aria-label="Proyecto anterior">&#8249;</button>
         <button class="portfolio-nav next" id="portfolioNext" type="button" aria-label="Proyecto siguiente">&#8250;</button>
       </div>
-
-      <div class="portfolio-more reveal">
-        <button type="button" class="btn btn-outline" id="verPortafolioCompleto">Ver portafolio completo</button>
-      </div>
     </div>
   </section>
 
@@ -1248,8 +1243,8 @@
   }
 
   function updatePortfolioNav() {
-    const hasOverflow = grid.scrollWidth > grid.clientWidth + 4;
-    portfolioPrev.hidden = portfolioNext.hidden = !hasOverflow;
+    const visibleCards = cards.filter(c => !c.hidden).length;
+    portfolioPrev.hidden = portfolioNext.hidden = visibleCards < 2;
   }
 
   portfolioPrev.addEventListener('click', () => scrollPortfolio(-1));
