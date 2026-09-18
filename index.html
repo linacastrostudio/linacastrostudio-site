@@ -395,7 +395,9 @@
   }
 
   /* Portfolio */
-  .portfolio{ background:var(--white); }
+  .portfolio{ background:var(--white); position:relative; }
+  .wave-divider{ position:absolute; top:0; left:0; width:100%; line-height:0; transform:translateY(-99%); pointer-events:none; }
+  .wave-divider svg{ display:block; width:100%; height:64px; }
   .grid-portfolio{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
@@ -479,7 +481,7 @@
     width:300px; height:300px; border-radius:16px; overflow:hidden; background:#eee;
     box-shadow:0 16px 34px rgba(36,26,34,.16);
   }
-  .case-slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .case-slide img{ width:100%; height:100%; object-fit:contain; display:block; }
   .case-slider-track.single-slide{ display:block; }
   .case-slider-track.single-slide .case-slide{ width:100%; }
   .case-slider-track.single-slide .case-slide .slide-img{ width:100%; height:min(48vh,420px); }
@@ -909,6 +911,9 @@
 
   <!-- ================= PORTFOLIO ================= -->
   <section class="portfolio" id="portafolio">
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,32 C240,80 480,0 720,32 C960,64 1200,8 1440,32 L1440,80 L0,80 Z" fill="var(--white)"></path></svg>
+    </div>
     <div class="wrap">
       <div class="section-head reveal">
         <div>
