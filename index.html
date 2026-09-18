@@ -1312,7 +1312,8 @@
 
   function updateGalleryNav() {
     const hasOverflow = caseSliderTrack.scrollWidth > caseSliderTrack.clientWidth + 4;
-    caseSlidePrev.hidden = caseSlideNext.hidden = !hasOverflow;
+    const slideCount = caseSliderTrack.querySelectorAll('.case-slide').length;
+    caseSlidePrev.hidden = caseSlideNext.hidden = slideCount < 2;
     // Center the row when every slide already fits (no scrolling needed);
     // left-align once it overflows, so scroll-snap starts flush at slide 1.
     caseSliderTrack.classList.toggle('fits', !hasOverflow);
