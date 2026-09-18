@@ -407,7 +407,10 @@
     -webkit-overflow-scrolling:touch;
     padding:6px 6px 14px;
     margin:-6px -6px 0;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
   }
+  .grid-portfolio::-webkit-scrollbar{ display:none; }
   .p-card{ cursor:pointer; flex:0 0 320px; scroll-snap-align:start; }
   .portfolio-nav{
     position:absolute; top:calc(50% - 24px); transform:translateY(-50%); z-index:2;
