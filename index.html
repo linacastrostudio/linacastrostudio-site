@@ -1318,6 +1318,29 @@
     caseSliderTrack.classList.toggle('fits', !hasOverflow);
   }
 
+  // Autoplay for the case gallery: slides the whole block (image + its description)
+  // together, loops at the end, pauses on hover/touch/focus. Only runs with 2+ slides.
+  const caseSlider = document.getElementById('caseSlider');
+  let caseAutoplayTimer = null;
+  function startCaseAutoplay() {
+    if (prefersReducedMotion) return;
+    stopCaseAutoplay();
+    if (caseSliderTrack.querySelectorAll('.case-slide').length < 2) return;
+    caseAutoplayTimer = setInterval(() => {
+      const atEnd = caseSliderTrack.scrollLeft + caseSliderTrack.clientWidth >= caseSliderTrack.scrollWidth - 4;
+      if (atEnd) caseSliderTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      else scrollGallery(1);
+    }, 4000);
+  }
+  function stopCaseAutoplay() {
+    clearInterval(caseAutoplayTimer);
+  }
+  caseSlider.addEventListener('mouseenter', stopCaseAutoplay);
+  caseSlider.addEventListener('mouseleave', startCaseAutoplay);
+  caseSlider.addEventListener('touchstart', stopCaseAutoplay, { passive: true });
+  caseSlider.addEventListener('focusin', stopCaseAutoplay);
+  caseSlider.addEventListener('focusout', startCaseAutoplay);
+
   function openCase(p) {
     // Cover is not part of the slide gallery — slides are only the extra photos
     // added per project (each with its own description). No gallery photos yet = fallback to cover, no dup.
@@ -1341,11 +1364,13 @@
     caseDeliverables.innerHTML = p.deliverables.map(d => `<li>${escapeHtml(d)}</li>`).join('');
     overlay.classList.add('open');
     document.body.classList.add('case-open');
+    startCaseAutoplay();
   }
 
   function closeCase() {
     overlay.classList.remove('open');
     document.body.classList.remove('case-open');
+    stopCaseAutoplay();
   }
 
   caseSlidePrev.addEventListener('click', () => scrollGallery(-1));
