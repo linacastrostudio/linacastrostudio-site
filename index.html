@@ -398,12 +398,28 @@
   .portfolio{ background:var(--white); position:relative; }
   .wave-divider{ position:absolute; top:0; left:0; width:100%; line-height:0; transform:translateY(-99%); pointer-events:none; }
   .wave-divider svg{ display:block; width:100%; height:64px; }
+  .portfolio-carousel{ position:relative; }
   .grid-portfolio{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:34px 32px;
+    display:flex;
+    gap:28px;
+    overflow-x:auto;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    padding:6px 6px 14px;
+    margin:-6px -6px 0;
   }
-  .p-card{ cursor:pointer; }
+  .p-card{ cursor:pointer; flex:0 0 320px; scroll-snap-align:start; }
+  .portfolio-nav{
+    position:absolute; top:calc(50% - 24px); transform:translateY(-50%); z-index:2;
+    width:46px; height:46px; border-radius:999px; border:none; cursor:pointer;
+    background:rgba(255,255,255,.94); color:var(--wine); font-size:21px; line-height:1;
+    display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-card);
+    transition:background .18s ease, transform .18s ease;
+  }
+  .portfolio-nav:hover{ background:#fff; transform:translateY(-50%) scale(1.06); }
+  .portfolio-nav.prev{ left:-10px; }
+  .portfolio-nav.next{ right:-10px; }
+  .portfolio-nav[hidden]{ display:none; }
   .p-card .thumb{
     border-radius:20px;
     overflow:hidden;
@@ -478,7 +494,7 @@
   .case-slider-track.fits{ justify-content:center; }
   .case-slide{ display:flex; flex-direction:column; gap:12px; flex:0 0 auto; width:300px; scroll-snap-align:start; }
   .case-slide .slide-img{
-    width:300px; height:300px; border-radius:16px; overflow:hidden; background:#eee;
+    width:300px; height:300px; border-radius:16px; overflow:hidden; background:transparent;
     box-shadow:0 16px 34px rgba(36,26,34,.16);
   }
   .case-slide img{ width:100%; height:100%; object-fit:contain; display:block; }
@@ -770,7 +786,7 @@
     .stat{ width:40%; }
     .stat-divider{ display:none; }
     .section-head h2{ font-size:30px; }
-    .grid-portfolio{ grid-template-columns:1fr 1fr; }
+    .p-card{ flex-basis:280px; }
     .pricing-grid{ grid-template-columns:1fr; }
     .price-card.featured{ transform:none; order:-1; }
     .uiux-inner{ flex-direction:column; align-items:flex-start; }
@@ -788,7 +804,7 @@
     .hero-copy h1{ font-size:32px; }
     .hero-actions{ flex-direction:column; align-items:stretch; }
     .hero-actions .btn{ width:100%; }
-    .grid-portfolio{ grid-template-columns:1fr; }
+    .p-card{ flex-basis:78vw; }
     .case-body{ padding:24px 24px 44px; }
     .case-slider{ padding:20px 20px 8px; }
     .case-slider-track{ gap:14px; }
@@ -930,7 +946,11 @@
         <button class="filter-pill" data-filter="UI/UX">UI/UX</button>
       </div>
 
-      <div class="grid-portfolio" id="portfolioGrid"></div>
+      <div class="portfolio-carousel">
+        <div class="grid-portfolio" id="portfolioGrid"></div>
+        <button class="portfolio-nav prev" id="portfolioPrev" type="button" aria-label="Proyecto anterior">&#8249;</button>
+        <button class="portfolio-nav next" id="portfolioNext" type="button" aria-label="Proyecto siguiente">&#8250;</button>
+      </div>
 
       <div class="portfolio-more reveal">
         <button type="button" class="btn btn-outline" id="verPortafolioCompleto">Ver portafolio completo</button>
@@ -1220,9 +1240,50 @@
 
   let cards = [];
 
+  const portfolioPrev = document.getElementById('portfolioPrev');
+  const portfolioNext = document.getElementById('portfolioNext');
+
+  function scrollPortfolio(dir) {
+    grid.scrollBy({ left: dir * grid.clientWidth * 0.8, behavior: 'smooth' });
+  }
+
+  function updatePortfolioNav() {
+    const hasOverflow = grid.scrollWidth > grid.clientWidth + 4;
+    portfolioPrev.hidden = portfolioNext.hidden = !hasOverflow;
+  }
+
+  portfolioPrev.addEventListener('click', () => scrollPortfolio(-1));
+  portfolioNext.addEventListener('click', () => scrollPortfolio(1));
+  grid.addEventListener('scroll', () => { clearTimeout(grid._t); grid._t = setTimeout(updatePortfolioNav, 100); });
+  window.addEventListener('resize', updatePortfolioNav);
+
+  // Autoplay: advance one card at a time, loop back at the end, pause on hover/touch/focus.
+  let portfolioAutoplayTimer = null;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function startPortfolioAutoplay() {
+    if (prefersReducedMotion) return;
+    stopPortfolioAutoplay();
+    portfolioAutoplayTimer = setInterval(() => {
+      const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4;
+      if (atEnd) grid.scrollTo({ left: 0, behavior: 'smooth' });
+      else scrollPortfolio(1);
+    }, 4000);
+  }
+  function stopPortfolioAutoplay() {
+    clearInterval(portfolioAutoplayTimer);
+  }
+  const portfolioCarousel = document.querySelector('.portfolio-carousel');
+  portfolioCarousel.addEventListener('mouseenter', stopPortfolioAutoplay);
+  portfolioCarousel.addEventListener('mouseleave', startPortfolioAutoplay);
+  portfolioCarousel.addEventListener('touchstart', stopPortfolioAutoplay, { passive: true });
+  portfolioCarousel.addEventListener('focusin', stopPortfolioAutoplay);
+  portfolioCarousel.addEventListener('focusout', startPortfolioAutoplay);
+
   (async () => {
     PROJECTS = await loadProjects();
     cards = renderGrid(PROJECTS);
+    updatePortfolioNav();
+    startPortfolioAutoplay();
   })();
 
   filterPills.forEach(pill => {
@@ -1234,6 +1295,8 @@
         const cats = card.dataset.cats.split(',');
         card.hidden = !(f === 'Todos' || cats.includes(f));
       });
+      grid.scrollLeft = 0;
+      updatePortfolioNav();
     });
   });
 
