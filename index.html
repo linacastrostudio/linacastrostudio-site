@@ -242,7 +242,7 @@
 
   /* ================= HERO ================= */
   .hero{
-    padding:76px 0 40px;
+    padding:76px 0 96px;
     position:relative;
   }
   .hero-grid{
@@ -482,9 +482,10 @@
     box-shadow:0 16px 34px rgba(36,26,34,.16);
   }
   .case-slide img{ width:100%; height:100%; object-fit:contain; display:block; }
-  .case-slider-track.single-slide{ display:block; }
-  .case-slider-track.single-slide .case-slide{ width:100%; }
-  .case-slider-track.single-slide .case-slide .slide-img{ width:100%; height:min(48vh,420px); }
+  .case-slider-track.single-slide{ display:flex; justify-content:center; }
+  .case-slider-track.single-slide .case-slide{ width:auto; max-width:100%; }
+  .case-slider-track.single-slide .case-slide .slide-img{ width:auto; max-width:100%; height:min(48vh,420px); background:none; }
+  .case-slider-track.single-slide .case-slide img{ width:auto; max-width:100%; height:100%; }
   .case-slide-caption{
     font-size:13px; font-style:italic; line-height:1.5; color:var(--muted); padding:0 2px;
   }
