@@ -540,7 +540,10 @@
   .case-slider-track{
     display:flex; gap:22px; overflow-x:auto; overflow-y:hidden; padding-bottom:46px;
     scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
   }
+  .case-slider-track::-webkit-scrollbar{ display:none; }
   .case-slider-track.fits{ justify-content:center; }
   .case-slide{ display:flex; flex-direction:column; gap:12px; flex:0 0 auto; width:300px; scroll-snap-align:start; }
   .case-slide .slide-img{
