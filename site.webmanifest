@@ -1,0 +1,14 @@
+{
+  "name": "Lina Castro Studio",
+  "short_name": "Lina Castro Studio",
+  "description": "Estudio creativo de diseño. Identidad de marca, branding y experiencias UI/UX.",
+  "lang": "es",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e7d7f3",
+  "theme_color": "#6e1e4d",
+  "icons": [
+    { "src": "/assets/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
