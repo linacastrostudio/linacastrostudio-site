@@ -15,11 +15,11 @@
 <meta property="og:description" content="Estudio creativo de diseño. Construimos marcas desde la estrategia, la narrativa y el diseño: identidad visual, branding y experiencias UI/UX.">
 <meta property="og:url" content="https://www.linacastrostudio.com/">
 <meta property="og:locale" content="es">
-<meta property="og:image" content="https://www.linacastrostudio.com/assets/images/croomie-portada.png">
+<meta property="og:image" content="https://www.linacastrostudio.com/assets/images/croomie-portada.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lina Castro Studio — Diseño de marca con dirección estratégica">
 <meta name="twitter:description" content="Estudio creativo de diseño. Identidad de marca, branding y experiencias UI/UX.">
-<meta name="twitter:image" content="https://www.linacastrostudio.com/assets/images/croomie-portada.png">
+<meta name="twitter:image" content="https://www.linacastrostudio.com/assets/images/croomie-portada.webp">
 
 <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
@@ -30,6 +30,9 @@
 <link rel="preconnect" href="https://hwodppkgdwqvspkutagz.supabase.co">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
+<!-- Preload LCP image (hero photo) -->
+<link rel="preload" as="image" fetchpriority="high" href="assets/images/hero-lina.webp">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -38,7 +41,7 @@
   "name": "Lina Castro Studio",
   "description": "Estudio creativo de diseño. Construimos marcas desde la estrategia, la narrativa y el diseño: identidad visual, branding y experiencias UI/UX.",
   "url": "https://www.linacastrostudio.com/",
-  "image": "https://www.linacastrostudio.com/assets/images/croomie-portada.png",
+  "image": "https://www.linacastrostudio.com/assets/images/croomie-portada.webp",
   "logo": "https://www.linacastrostudio.com/assets/icons/icon-512.png",
   "priceRange": "$$",
   "knowsLanguage": "es",
@@ -950,7 +953,7 @@
 
         <div class="hero-visual">
           <div class="blob"></div>
-          <img class="flower-frame" src="assets/images/Imagenes landing-08.png" alt="Lina Castro, fundadora de Lina Castro Studio">
+          <img class="flower-frame" src="assets/images/hero-lina.webp" alt="Lina Castro, fundadora de Lina Castro Studio" fetchpriority="high">
 
           <div class="badge-pill">
             <span class="dot"><img src="assets/images/Imagenes landing-09.png" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></span>
